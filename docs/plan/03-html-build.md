@@ -30,8 +30,8 @@ docs build --source <directory> --output <directory>
 2. 在 Typer build 命令中将默认 format 设置为 `html`。
 3. 调用源配置解析模块，得到临时 MkDocs 配置。
 4. 将 `site_dir` 设置为 `<output>/html`。
-5. 调用 MkDocs Python API 或安全的子进程封装执行构建。
-6. 收集构建结果，输出 HTML 目录位置。
+5. 调用 MkDocs Python API 或安全的子进程封装执行构建；构建默认使用**非 strict 模式**，`--strict` 检查仅在 CI 的 `mkdocs build --strict` 中执行。
+6. 收集构建结果，通过 `rich` 渲染 HTML 目录位置。
 7. 将失败转换为统一 `BUILD_FAILED` 错误。
 
 ## 影响范围

@@ -37,8 +37,8 @@ docs build --format all --source <directory> --output <directory>
 1. 复用 HTML 构建服务和 PDF 构建服务。
 2. 在 all 构建中创建输出根目录及必要子目录。
 3. 实现顺序执行和结果聚合。
-4. 输出每种格式的产物路径。
-5. 将部分成功状态记录到构建结果，供错误消息展示。
+4. 输出每种格式的产物路径，通过 `rich` 渲染构建摘要。
+5. 将部分成功状态记录到构建结果：PDF 失败时退出码为 `1`（构建失败），但终端消息中标注"部分成功：HTML 已生成，PDF 失败"，帮助用户区分全量成功和部分成功。
 6. 与 `clean` 和 `archive` 共享输出布局常量。
 
 ## 影响范围
@@ -60,7 +60,7 @@ docs build --format all --source <directory> --output <directory>
 - 输出目录固定为 `html`、`pdf`、`archive` 三个子目录。
 - all 构建的日志清楚展示每个阶段状态。
 - 任何阶段失败都返回非零退出码。
-- 成功构建后可立即执行 `docs archive --output zip`。
+- 成功构建后可立即执行 `docs archive --format zip`。
 
 ## 风险与注意事项
 

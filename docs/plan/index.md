@@ -28,7 +28,8 @@ docs build --output <directory>
 docs build --source <directory>
 docs serve
 docs clean
-docs archive --output zip
+docs archive --format zip
+docs archive --format zip --output <directory>
 ```
 
 默认值：
@@ -41,6 +42,7 @@ docs archive --output zip
 | HTML 输出 | `<output>/html` |
 | PDF 输出 | `<output>/pdf/docs.pdf` |
 | 归档输出 | `<output>/archive/docs.zip` |
+| `docs archive` 默认格式 | `zip` |
 
 ## 实现步骤
 
@@ -67,8 +69,9 @@ docs archive --output zip
 - `docs build --format html/pdf/all` 分别生成预期产物。
 - `docs serve` 可启动 MkDocs 预览流程，测试中使用 mock 避免阻塞。
 - `docs clean` 只清理 CLI 管理的输出目录。
-- `docs archive --output zip` 生成可解压 zip。
+- `docs archive --format zip` 生成可解压 zip。
 - Windows、macOS、Linux CI 至少覆盖 Python 3.13。
+- `docs --help` 在 PowerShell、CMD、POSIX shell 均可识别。
 
 ## 验收标准
 
@@ -78,7 +81,7 @@ docs archive --output zip
 
 ## 风险与注意事项
 
-- 裸 `docs` 命令与当前 `package-mode = false` 存在实现冲突，后续功能实现需要切换为本地可安装 CLI，但不引入 PyPI 发布。
+- 裸 `docs` 命令与当前 `package-mode = false` 存在实现冲突，后续功能实现需切换 `package-mode = true` 并通过 `[project.scripts]` 暴露 console script；保留 `[project]` 元数据，但不引入 `publish`/`twine` 等上传流程。
 - PDF 构建依赖 `mkdocs-with-pdf` 和底层渲染依赖，跨平台失败率高于 HTML。
 - `clean` 是潜在破坏性命令，必须先实现严格路径保护。
 

@@ -27,7 +27,7 @@ docs clean --output <directory>
 
 1. 定义输出布局常量：`html`、`pdf`、`archive`。
 2. 实现路径解析，得到 output 的绝对路径。
-3. 校验 output 不等于项目根、不等于 source、不为空、不为磁盘根。
+3. 校验 output 不等于项目根、不等于 source、不为空、不为磁盘根、不等于 `Path.home()`、不在 `$env:WINDIR` 或 `/` 等系统路径下。
 4. 仅删除受管理子目录，不递归删除任意传入路径本身。
 5. 使用 `shutil.rmtree` 和 `Path`，避免 shell 删除命令。
 6. 输出删除摘要。

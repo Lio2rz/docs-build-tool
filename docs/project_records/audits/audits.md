@@ -2,7 +2,9 @@
 
 <!-- BEGIN: auto-generated -->
 
-当前没有审计报告。
+## 历史报告
+
+- [2026-05-14 开发计划审计](audit-report-2026-05-14-plan-audit.md)
 
 ## 模板
 

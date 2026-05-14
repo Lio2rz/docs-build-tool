@@ -25,11 +25,11 @@ docs build --format pdf --source <directory> --output <directory>
 
 ## 实现步骤
 
-1. 在构建配置中启用 `mkdocs-with-pdf` 插件，仅用于 PDF 构建。
+1. 在构建配置中启用 `mkdocs-with-pdf` 插件，仅用于 PDF 构建；显式设置插件 `output_path: docs.pdf`，避免默认 `pdf/document.pdf`。
 2. 将 HTML 中间输出和 PDF 输出隔离到 `<output>/pdf` 工作目录。
-3. 配置 PDF 文件名为 `docs.pdf`。
+3. 通过插件配置而非事后重命名固定 PDF 文件名为 `docs.pdf`。
 4. 调用 MkDocs 构建流程生成 PDF。
-5. 构建后检查 `<output>/pdf/docs.pdf` 是否存在且非空。
+5. 构建后检查 `<output>/pdf/docs.pdf` 是否存在且非空，通过 `rich` 渲染产物路径。
 6. 捕获 WeasyPrint、字体、图片资源等常见失败并转换为清晰错误。
 
 ## 影响范围
@@ -45,7 +45,7 @@ docs build --format pdf --source <directory> --output <directory>
 - 缺失图片时错误可读。
 - 指定输出目录时 PDF 写入 `<output>/pdf/docs.pdf`。
 - PDF 插件不可用时提示安装 `doc-group`。
-- Windows/macOS/Linux 至少执行轻量 PDF smoke test；如 CI 环境不稳定，可将完整 PDF 测试标记为集成测试。
+- Windows/macOS/Linux 至少执行轻量 PDF smoke test：Linux 必跑，Windows/macOS 标记为 `integration`（pytest mark）并允许在 CI 中按需开启，缓解渲染依赖不稳定。
 
 ## 验收标准
 

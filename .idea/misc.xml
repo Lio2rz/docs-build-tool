@@ -3,8 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Poetry (docsbuildtool)" />
   </component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="4bb8d3f1-5044-4a50-b31d-7a647ac46a40" />
-  </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Poetry (docsbuildtool)" project-jdk-type="Python SDK" />
 </project>

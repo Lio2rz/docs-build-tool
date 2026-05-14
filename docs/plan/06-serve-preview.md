@@ -27,7 +27,7 @@ docs serve --output <directory>
 ## 实现步骤
 
 1. 在 CLI 中新增 `serve` 子命令。
-2. 复用配置解析逻辑，将 `site_dir` 指向 `<output>/html`。
+2. 复用配置解析逻辑生成临时 MkDocs 配置；`site_dir` 仅作配置一致性占位（`mkdocs serve` 默认走内存渲染，不写盘到该目录），用户传入 `--output` 主要用于工作目录与产物布局对齐。
 3. 调用 MkDocs serve 流程。
 4. 处理 KeyboardInterrupt，正常退出。
 5. 输出本地预览地址和源目录。

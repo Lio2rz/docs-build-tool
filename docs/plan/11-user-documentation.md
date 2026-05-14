@@ -15,16 +15,26 @@
 - `docs build` 及 format/source/output 参数。
 - `docs serve`。
 - `docs clean`。
-- `docs archive --output zip`。
+- `docs archive --format zip`。
 - 输出目录结构。
 - PDF 依赖和跨平台注意事项。
 
+## 实施决策
+
+- `docs/getting_started/`、`docs/build_and_deployment/`、`docs/troubleshooting/` 等目录现存自动生成的「示例性内容」，描述的是「被构建的软件」而非 `docsbuildtool`。
+- 本计划**保留现有示例内容**，CLI 用户文档以**新增页**形式挂入：
+  - `docs/getting_started/cli_quick_start.md`
+  - `docs/build_and_deployment/cli_build_html.md`
+  - `docs/build_and_deployment/cli_build_pdf.md`
+  - `docs/troubleshooting/cli_common_issues.md`
+- 同步在 `docs/summary.md` 增加对应导航条目。
+
 ## 实现步骤
 
-1. 更新 README 快速开始，加入 CLI 安装和最小命令。
-2. 在 `docs/getting_started/` 增加 CLI 快速入门。
-3. 在 `docs/build_and_deployment/` 增加 HTML/PDF 构建说明。
-4. 在 `docs/troubleshooting/` 增加常见错误。
+1. 更新 README 快速开始，加入 CLI 安装（`pip install -e .` 或 `poetry install`）与最小命令。
+2. 在 `docs/getting_started/cli_quick_start.md` 提供 CLI 快速入门。
+3. 在 `docs/build_and_deployment/cli_build_html.md`、`cli_build_pdf.md` 提供 HTML/PDF 构建说明。
+4. 在 `docs/troubleshooting/cli_common_issues.md` 汇总常见错误（依赖缺失、PDF 渲染失败、`docs` 命令未找到等）。
 5. 在 `docs/summary.md` 中挂载新增用户文档。
 6. 准备 `examples/` 或 `tests/fixtures/` 中的示例文档树。
 

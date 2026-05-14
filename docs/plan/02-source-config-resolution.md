@@ -29,9 +29,9 @@ docs serve --source <directory>
 
 1. 定义源配置解析数据结构，包含 source、output、config_path、summary_path、work_dir。
 2. 校验 source 是否存在且为目录。
-3. 校验 output 不等于 source、不等于项目根目录、不在不安全系统路径下。
+3. 校验 output 不等于 source、不等于项目根、不等于磁盘根、不等于 `Path.home()`、不在 `$env:WINDIR` 或 `/` 等系统路径下。
 4. 实现 MkDocs 配置加载：源目录配置优先，项目模板兜底。
-5. 实现配置合并：覆盖 `docs_dir`、`site_dir`、`exclude_docs` 和必要插件配置。
+5. 实现配置合并：覆盖 `docs_dir`、`site_dir` 与必要插件配置；对 `exclude_docs` 采用**追加**策略——在用户已有 `exclude_docs` 文本后追加 `/summary.md` 与临时导航文件路径，绝不覆盖用户原值；对 `plugins` 采用合并策略，保留用户插件并补齐 `literate-nav`、`section-index`。
 6. 实现临时 `summary.md` 生成逻辑，按 Markdown 文件稳定排序。
 7. 为后续构建命令返回可直接传给 MkDocs 的配置文件路径。
 
@@ -48,8 +48,9 @@ docs serve --source <directory>
 - source 含 `mkdocs.yml` 和 `summary.md` 时优先使用用户文件。
 - source 仅含 Markdown 文件时生成临时 `summary.md`。
 - output 与 source 相同时拒绝。
+- output 等于项目根、磁盘根、`Path.home()` 或 `$env:WINDIR` / `/` 等系统路径时拒绝。
 - output 含空格和非 ASCII 路径时解析成功。
-- 合并后的配置包含 `literate-nav`、`section-index` 和正确 `docs_dir`。
+- 合并后的配置包含 `literate-nav`、`section-index` 和正确 `docs_dir`，并保留用户原有 `exclude_docs` 与插件配置。
 
 ## 验收标准
 
