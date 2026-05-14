@@ -16,7 +16,7 @@ build-backend = "poetry.core.masonry.api"
 
 ```powershell
 poetry lock
-poetry install --with dev-group
+poetry install --with dev-group --no-root
 poetry check --lock
 ```
 
@@ -27,6 +27,7 @@ poetry check --lock
 - 文档构建依赖放入 `doc-group`。
 - 测试依赖放入 `test-group`。
 - 开发聚合依赖放入 `dev-group`。
-- 只有包运行时真正需要的依赖才放入 `project.dependencies`。
+- 当前项目使用 `package-mode = false`，Poetry 只负责依赖管理，不打包、不上传到 PyPI。
+- 只有项目脚本运行时真正需要的依赖才放入 `project.dependencies`。
 
 <!-- END: auto-generated -->

@@ -16,7 +16,7 @@ for that exact package after the distinction is explained.
 
 ## Repository Layout
 
-- `src/docsbuildtool/`: package source.
+- `src/docsbuildtool/`: project source.
 - `tests/`: automated tests.
 - `pyproject.toml`: Python packaging and dependency metadata.
 - `.agents/`: shared agent documentation and operating notes.
@@ -39,7 +39,7 @@ for that exact package after the distinction is explained.
 Use Poetry when available:
 
 ```powershell
-poetry install
+poetry install --no-root
 poetry run pytest
 ```
 

@@ -9,7 +9,7 @@
 运行：
 
 ```powershell
-poetry install --with dev-group
+poetry install --with dev-group --no-root
 ```
 
 ## 为什么使用 Python 3.13？

@@ -23,7 +23,7 @@ with Poetry if dependency resolution is available.
 Common commands:
 
 ```powershell
-poetry install
+poetry install --no-root
 poetry run pytest
 poetry run mkdocs build -f <mkdocs.yml> -d <output-dir>
 ```

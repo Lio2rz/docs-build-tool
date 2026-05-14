@@ -6,7 +6,7 @@
 
 <!-- auto-generated -->
 
-当前不提供。项目定位是 Python 文档构建工具，预期先提供 CLI 和 Python 包 API。
+当前不提供。项目定位是由 Poetry 管理依赖的 Python 文档构建项目，预期先提供本地 CLI 或脚本入口。
 
 ## 可以集成到 CI 吗？
 

@@ -32,7 +32,8 @@
 
 项目目前处于早期骨架阶段：
 
-- Python 包名：`docsbuildtool`
+- 项目名：`docsbuildtool`
+- Poetry 模式：非打包项目，仅用于依赖管理和任务运行
 - 源码目录：`src/docsbuildtool/`
 - 测试目录：`tests/`
 - 开发文档目录：`docs/`
@@ -43,7 +44,7 @@
 
 项目使用 Poetry 管理依赖：
 
-- `project.dependencies`：运行期基础依赖，包括 `rich` 和 `typer`。
+- `project.dependencies`：项目脚本运行期基础依赖，包括 `rich` 和 `typer`。
 - `doc-group`：文档构建依赖，包括 MkDocs、Material 主题、导航插件和 PDF 插件。
 - `test-group`：测试依赖，包括 `pytest` 和 `pytest-cov`。
 - `dev-group`：开发聚合组，包含 `doc-group`、`test-group`、Black、isort、mypy 和 Ruff。
@@ -51,7 +52,7 @@
 ## 快速验证
 
 ```powershell
-poetry install --with dev-group
+poetry install --with dev-group --no-root
 poetry check --lock
 poetry run black --check .
 poetry run isort --check-only .

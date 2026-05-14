@@ -49,7 +49,7 @@ test-group = [
 ]
 
 [tool.poetry]
-packages = [{include = "docsbuildtool", from = "src"}]
+package-mode = false
 
 [tool.pytest.ini_options]
 minversion = "8.3"
@@ -98,7 +98,3 @@ select = [
     "I",
     "UP",
 ]
-
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"

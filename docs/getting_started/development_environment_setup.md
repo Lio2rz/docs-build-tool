@@ -10,7 +10,7 @@
 4. 安装开发依赖：
 
    ```powershell
-   poetry install --with dev-group
+   poetry install --with dev-group --no-root
    ```
 
 5. 运行配置检查：

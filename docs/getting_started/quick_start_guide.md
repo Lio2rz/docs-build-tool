@@ -7,7 +7,7 @@
 ## 最小验证流程
 
 ```powershell
-poetry install --with dev-group
+poetry install --with dev-group --no-root
 poetry check --lock
 poetry run ruff check .
 poetry run pytest

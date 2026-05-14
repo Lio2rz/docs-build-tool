@@ -26,7 +26,7 @@ skip_covered = true
 ## 测试依赖安装
 
 ```powershell
-poetry install --with test-group
+poetry install --with test-group --no-root
 ```
 
 <!-- TODO: 增加真实测试后，补充覆盖率目标、测试数据和 CI 执行方式。 -->

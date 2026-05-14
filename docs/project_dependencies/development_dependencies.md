@@ -18,7 +18,7 @@
 安装命令：
 
 ```powershell
-poetry install --with dev-group
+poetry install --with dev-group --no-root
 ```
 
 常用验证命令：

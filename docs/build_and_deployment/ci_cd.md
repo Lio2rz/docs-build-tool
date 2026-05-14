@@ -8,7 +8,7 @@
 
 1. 安装 Python 3.13。
 2. 安装 Poetry。
-3. 执行 `poetry install --with dev-group`。
+3. 执行 `poetry install --with dev-group --no-root`。
 4. 执行 `poetry check --lock`。
 5. 执行 `poetry run ruff check .`。
 6. 执行 `poetry run pytest`。

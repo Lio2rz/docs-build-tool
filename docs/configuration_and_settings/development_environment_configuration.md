@@ -7,7 +7,7 @@
 开发环境建议安装 `dev-group`：
 
 ```powershell
-poetry install --with dev-group
+poetry install --with dev-group --no-root
 ```
 
 `dev-group` 包含：

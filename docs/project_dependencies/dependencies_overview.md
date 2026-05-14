@@ -8,7 +8,7 @@
 
 | 分组 | 用途 |
 | --- | --- |
-| `project.dependencies` | 包运行期基础依赖。 |
+| `project.dependencies` | 项目脚本运行期基础依赖；当前项目不作为 Python 包发布。 |
 | `doc-group` | 文档构建依赖，包括 MkDocs、主题和 PDF 支持。 |
 | `test-group` | 测试和覆盖率依赖。 |
 | `dev-group` | 开发环境聚合组，包含 `doc-group`、`test-group`、Black、isort、mypy 和 Ruff。 |

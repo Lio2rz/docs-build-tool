@@ -2,7 +2,7 @@
 
 <!-- BEGIN: auto-generated -->
 
-`docsbuildtool` 是一个 Python 包，目标是把指定目录下的结构化 Markdown 文档转换为可发布的静态 HTML 文档，并支持生成 PDF 文档。
+`docsbuildtool` 是一个由 Poetry 管理依赖的 Python 文档构建项目，目标是把指定目录下的结构化 Markdown 文档转换为可发布的静态 HTML 文档，并支持生成 PDF 文档。
 
 ## 目标用户
 

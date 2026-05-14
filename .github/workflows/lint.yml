@@ -21,7 +21,7 @@ jobs:
         run: pipx install poetry
 
       - name: Install dependencies
-        run: poetry install --with dev-group
+        run: poetry install --with dev-group --no-root
 
       - name: Check Poetry metadata and lock file
         run: poetry check --lock
