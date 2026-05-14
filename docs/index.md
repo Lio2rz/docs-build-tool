@@ -13,6 +13,9 @@
 ![PyYAML](https://img.shields.io/badge/pyyaml-6.0.3-4B8BBE)
 ![pytest](https://img.shields.io/badge/pytest-9.0.3-4B8BBE)
 ![pytest-cov](https://img.shields.io/badge/pytest--cov-7.1.0-4B8BBE)
+![Black](https://img.shields.io/badge/black-25.12.0-4B8BBE)
+![isort](https://img.shields.io/badge/isort-6.1.0-4B8BBE)
+![mypy](https://img.shields.io/badge/mypy-1.20.2-4B8BBE)
 ![Ruff](https://img.shields.io/badge/ruff-0.15.12-4B8BBE)
 
 `docsbuildtool` 是一个 Python 文档构建工具项目，目标是将指定目录中的结构化 Markdown 文档转换为静态 HTML 文档，并支持生成 PDF 文档。
@@ -43,14 +46,17 @@
 - `project.dependencies`：运行期基础依赖，包括 `rich` 和 `typer`。
 - `doc-group`：文档构建依赖，包括 MkDocs、Material 主题、导航插件和 PDF 插件。
 - `test-group`：测试依赖，包括 `pytest` 和 `pytest-cov`。
-- `dev-group`：开发聚合组，包含 `doc-group`、`test-group` 和 `ruff`。
+- `dev-group`：开发聚合组，包含 `doc-group`、`test-group`、Black、isort、mypy 和 Ruff。
 
 ## 快速验证
 
 ```powershell
 poetry install --with dev-group
 poetry check --lock
+poetry run black --check .
+poetry run isort --check-only .
 poetry run ruff check .
+poetry run mypy
 poetry run pytest
 poetry run mkdocs build
 ```

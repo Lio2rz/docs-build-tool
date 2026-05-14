@@ -1,0 +1,42 @@
+name: Lint
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Poetry
+        run: pipx install poetry
+
+      - name: Install dependencies
+        run: poetry install --with dev-group
+
+      - name: Check Poetry metadata and lock file
+        run: poetry check --lock
+
+      - name: Check formatting with Black
+        run: poetry run black --check .
+
+      - name: Check import sorting with isort
+        run: poetry run isort --check-only .
+
+      - name: Run Ruff
+        run: poetry run ruff check .
+
+      - name: Run mypy
+        run: poetry run mypy
+
+      - name: Build MkDocs site
+        run: poetry run mkdocs build --strict

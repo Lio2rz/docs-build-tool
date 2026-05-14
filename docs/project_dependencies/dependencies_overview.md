@@ -11,7 +11,7 @@
 | `project.dependencies` | 包运行期基础依赖。 |
 | `doc-group` | 文档构建依赖，包括 MkDocs、主题和 PDF 支持。 |
 | `test-group` | 测试和覆盖率依赖。 |
-| `dev-group` | 开发环境聚合组，包含 `doc-group`、`test-group` 和 Ruff。 |
+| `dev-group` | 开发环境聚合组，包含 `doc-group`、`test-group`、Black、isort、mypy 和 Ruff。 |
 
 ## 子文档
 
