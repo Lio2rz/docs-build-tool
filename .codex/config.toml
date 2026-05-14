@@ -1,0 +1,8 @@
+# Project-level Codex note.
+#
+# Canonical agent instructions are in:
+# - ../AGENTS.md
+# - ../.agents/
+#
+# Keep this file for Codex-specific runtime configuration only. Shared project
+# rules belong in AGENTS.md or .agents/.
