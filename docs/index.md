@@ -1,60 +1,68 @@
-# docsbuildtool 开发文档
+# docsbuildtool
 
-<!-- BEGIN: auto-generated -->
+![Python](https://img.shields.io/badge/python-%3E%3D3.13-3776AB)
+![Rich](https://img.shields.io/badge/rich-15.0.0-4B8BBE)
+![Typer](https://img.shields.io/badge/typer-0.25.1-4B8BBE)
+![Markdown](https://img.shields.io/badge/markdown-3.10.2-4B8BBE)
+![MkDocs](https://img.shields.io/badge/mkdocs-1.6.1-4B8BBE)
+![mkdocs-literate-nav](https://img.shields.io/badge/mkdocs--literate--nav-0.6.3-4B8BBE)
+![mkdocs-material](https://img.shields.io/badge/mkdocs--material-9.7.6-4B8BBE)
+![mkdocs-section-index](https://img.shields.io/badge/mkdocs--section--index-0.3.12-4B8BBE)
+![mkdocs-with-pdf](https://img.shields.io/badge/mkdocs--with--pdf-0.9.3-4B8BBE)
+![pymdown-extensions](https://img.shields.io/badge/pymdown--extensions-10.21.3-4B8BBE)
+![PyYAML](https://img.shields.io/badge/pyyaml-6.0.3-4B8BBE)
+![pytest](https://img.shields.io/badge/pytest-9.0.3-4B8BBE)
+![pytest-cov](https://img.shields.io/badge/pytest--cov-7.1.0-4B8BBE)
+![Ruff](https://img.shields.io/badge/ruff-0.15.12-4B8BBE)
 
-本文档是 `docsbuildtool` 项目的开发文档入口。项目当前处于早期骨架阶段，目标是构建一个 Python 工具，将指定目录中的结构化 Markdown 文档转换为静态 HTML 文档，并支持生成 PDF 文档。
+`docsbuildtool` 是一个 Python 文档构建工具项目，目标是将指定目录中的结构化 Markdown 文档转换为静态 HTML 文档，并支持生成 PDF 文档。
 
-## 文档目录
+## 项目目标
 
-- [介绍](introduction/introduction.md)
-  - [软件概述](introduction/software_overview.md)
-  - [软件架构概览](introduction/software_architecture.md)
-  - [关键术语](introduction/key_terms.md)
-- [架构设计](architecture/architecture.md)
-  - [系统架构](architecture/system_architecture.md)
-  - [模块划分](architecture/module_boundaries.md)
-  - [依赖规则](architecture/dependency_rules.md)
-  - [扩展机制](architecture/extension_mechanism.md)
-  - [架构决策记录](architecture/adr.md)
-- [特性设计](feature_design/feature_design.md)
-  - [特性设计模板](feature_design/feature_template.md)
-- [入门指南](getting_started/getting_started.md)
-  - [系统要求](getting_started/system_requirements.md)
-  - [开发环境搭建](getting_started/development_environment_setup.md)
-  - [快速入门](getting_started/quick_start_guide.md)
-- [配置和设置](configuration_and_settings/configuration_and_settings.md)
-  - [环境配置概述](configuration_and_settings/environment_configuration_overview.md)
-  - [开发环境配置](configuration_and_settings/development_environment_configuration.md)
-  - [测试环境配置](configuration_and_settings/testing_environment_configuration.md)
-  - [配置文件](configuration_and_settings/configuration_files.md)
-  - [环境变量](configuration_and_settings/environment_variables.md)
-- [数据设计](data_design/data_design.md)
-- [项目依赖](project_dependencies/dependencies_overview.md)
-- [版本控制](version_control/version_control_overview.md)
-- [最佳实践](best_practices/best_practices.md)
-- [API 文档](api_documentation/api_documentation.md)
-- [构建和部署](build_and_deployment/build_and_deployment.md)
-- [运行维护](operations/operations.md)
-- [测试](testing/testing.md)
-- [性能优化](performance_optimization/performance_optimization.md)
-- [安全](security/security.md)
-- [审计](audit/audit.md)
-- [项目记录](project_records/project_records.md)
-- [故障排除](troubleshooting/troubleshooting.md)
-- [FAQ](faq/faq.md)
-- [词汇表](glossary/glossary.md)
-- [附录](appendix/appendix.md)
-- [反馈和支持](feedback_and_support/feedback_and_support.md)
+- 使用 MkDocs 生态生成静态 HTML 文档站点。
+- 使用 `docs/summary.md` 作为 MkDocs 导航源，避免在 `mkdocs.yml` 中硬编码完整导航。
+- 支持通过 `mkdocs-with-pdf` 从同一套 Markdown 文档生成 PDF。
+- 保持输入目录、输出目录和 MkDocs 配置路径可配置。
+- 构建过程中不修改源 Markdown 文档。
 
 ## 当前状态
 
-- 包名：`docsbuildtool`
-- 语言：Python
-- Python 版本：`>=3.13`
-- 包管理：Poetry
+项目目前处于早期骨架阶段：
+
+- Python 包名：`docsbuildtool`
 - 源码目录：`src/docsbuildtool/`
 - 测试目录：`tests/`
-- HTML 文档生成基础：MkDocs
-- PDF 生成方向：`mkdocs-with-pdf`
+- 开发文档目录：`docs/`
+- MkDocs 配置：`mkdocs.yml`
+- 导航定义：`docs/summary.md`
 
-<!-- END: auto-generated -->
+## 依赖分组
+
+项目使用 Poetry 管理依赖：
+
+- `project.dependencies`：运行期基础依赖，包括 `rich` 和 `typer`。
+- `doc-group`：文档构建依赖，包括 MkDocs、Material 主题、导航插件和 PDF 插件。
+- `test-group`：测试依赖，包括 `pytest` 和 `pytest-cov`。
+- `dev-group`：开发聚合组，包含 `doc-group`、`test-group` 和 `ruff`。
+
+## 快速验证
+
+```powershell
+poetry install --with dev-group
+poetry check --lock
+poetry run ruff check .
+poetry run pytest
+poetry run mkdocs build
+```
+
+当前 `tests/` 目录还没有测试用例，因此 `poetry run pytest` 可能显示 `no tests ran`。
+
+## 文档构建
+
+HTML 文档构建：
+
+```powershell
+poetry run mkdocs build
+```
+
+构建输出目录为 `site/`。该目录是构建产物，默认不提交到版本控制。
