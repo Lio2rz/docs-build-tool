@@ -1,0 +1,32 @@
+site_name: Docs Build Tool
+site_description: Build static HTML and PDF documentation from structured Markdown directories.
+docs_dir: docs
+site_dir: site
+exclude_docs: |
+  /summary.md
+
+theme:
+  name: material
+  language: zh
+
+plugins:
+  - search
+  - literate-nav:
+      nav_file: summary.md
+  - section-index
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
