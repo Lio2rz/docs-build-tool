@@ -13,6 +13,9 @@ from docsbuildtool.errors import ConfigError
 DEFAULT_SOURCE = "docs"
 DEFAULT_OUTPUT = "site"
 PROJECT_ROOT = Path.cwd()
+OUTPUT_HTML = "html"
+OUTPUT_PDF = "pdf"
+OUTPUT_ARCHIVE = "archive"
 
 
 @dataclass
@@ -141,6 +144,69 @@ def generate_mkdocs_config(source: Path, output: Path) -> ResolvedConfig:
             plugins.append({"literate-nav": {"nav_file": resolved_summary.name}})
         if "section-index" not in plugin_names:
             plugins.append("section-index")
+    merged["plugins"] = plugins
+
+    config_path = work_dir / "mkdocs.yml"
+    with open(config_path, "w", encoding="utf-8") as f:
+        yaml.safe_dump(merged, f, allow_unicode=True)
+
+    return ResolvedConfig(
+        source=source,
+        output=output,
+        config_path=config_path,
+        summary_path=resolved_summary if resolved_summary.exists() else None,
+        work_dir=work_dir,
+    )
+
+
+def generate_pdf_config(source: Path, output: Path) -> ResolvedConfig:
+    validate_paths(source, output)
+
+    work_dir = Path(tempfile.mkdtemp(prefix="docsbuildtool-pdf-"))
+
+    source_mkdocs = source / "mkdocs.yml"
+    if source_mkdocs.exists():
+        user_config = _load_mkdocs_yaml(source_mkdocs)
+    else:
+        user_config = {}
+
+    template = _load_mkdocs_yaml(PROJECT_ROOT / "mkdocs.yml")
+
+    merged: dict[str, Any] = dict(template)
+    merged.update(user_config)
+    merged["docs_dir"] = source.resolve().as_posix()
+    merged["site_dir"] = output.resolve().as_posix()
+
+    resolved_summary: Path | None = None
+    source_summary = source / "summary.md"
+    if source_summary.exists():
+        resolved_summary = source_summary
+    else:
+        resolved_summary = _generate_summary(source, work_dir)
+
+    extra_excludes = ["/summary.md"]
+    if not source_summary.exists() and resolved_summary.parent == work_dir:
+        try:
+            extra_excludes.append("/" + resolved_summary.resolve().relative_to(source.resolve()).as_posix())
+        except ValueError:
+            pass
+
+    merged["exclude_docs"] = _merge_exclude_docs(template.get("exclude_docs"), extra_excludes)
+
+    plugins = merged.get("plugins", [])
+    if isinstance(plugins, list):
+        plugin_names: set[str] = set()
+        for p in plugins:
+            if isinstance(p, dict):
+                plugin_names.update(p.keys())
+            elif isinstance(p, str):
+                plugin_names.add(p)
+        if "literate-nav" not in plugin_names:
+            plugins.append({"literate-nav": {"nav_file": resolved_summary.name}})
+        if "section-index" not in plugin_names:
+            plugins.append("section-index")
+        if "with-pdf" not in plugin_names:
+            plugins.append({"with-pdf": {"output_path": "docs.pdf"}})
     merged["plugins"] = plugins
 
     config_path = work_dir / "mkdocs.yml"

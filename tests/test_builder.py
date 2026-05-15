@@ -40,7 +40,7 @@ def test_cli_build_format_html(tmp_path: Path) -> None:
     assert "HTML built" in result.stdout
 
 
-def test_cli_build_pdf_not_implemented(tmp_path: Path) -> None:
+def test_cli_build_pdf_handles_failure(tmp_path: Path) -> None:
     source = FIXTURES / "minimal-docs"
     output = tmp_path / "site"
     result = runner.invoke(app, ["build", "--format", "pdf", "--source", str(source), "--output", str(output)])
