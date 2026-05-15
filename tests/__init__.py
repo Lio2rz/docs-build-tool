@@ -29,9 +29,3 @@
 #
 # @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
 # ======================================================================================================================
-
-"""Test suite for the docsbuildtool package.
-
-This package contains unit and integration tests for the docsbuildtool CLI tool,
-including tests for building, archiving, cleaning, configuration, and CLI behavior.
-"""
