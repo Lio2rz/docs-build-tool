@@ -5,6 +5,7 @@ from rich.console import Console
 
 from docsbuildtool.builder import BuildFormat, build_all, build_html, build_pdf
 from docsbuildtool.errors import DocsError, ExitCode
+from docsbuildtool.serve import serve_preview
 
 app = typer.Typer(
     name="docs",
@@ -84,7 +85,9 @@ def serve(
     ] = None,
 ) -> None:
     """Start a local preview server for the documentation."""
-    console.print("[yellow]serve command is not yet implemented.[/yellow]")
+    console.print(f"[bold]Starting preview server for:[/bold] {source or 'docs'}")
+    console.print("[dim]Press Ctrl+C to stop.[/dim]")
+    serve_preview(source, None)
 
 
 @app.command()
