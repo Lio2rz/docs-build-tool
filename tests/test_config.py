@@ -1,3 +1,36 @@
+#!/usr/bin/env python3
+
+# ======================================================================================================================
+# @description Unit tests for configuration resolution and MkDocs YAML generation
+#
+# @details     Tests ``resolve_source``, ``resolve_output``, path validation (output cannot equal source, cannot be
+#              protected path), config generation with and without user mkdocs.yml, summary generation, and output
+#              directory structure. All tests use ``tmp_path`` fixtures and the ``minimal-docs`` fixture set.
+#
+# ======================================================================================================================
+#
+# @filename   test_config.py
+# @path       tests/test_config.py
+#
+# @project    docsbuildtool
+# @product    Docs Build Tool
+# @encoding   utf-8
+#
+# @author     Lio2rz
+# @email      chen.mo@outlook.com
+# @time       2026/05/16 01:26
+#
+# @vcs        git
+# @version    0.0.2
+#
+# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
+# @record     [2026/05/15 17:11] <Carl Chen> feat(config): add source directory resolution and MkDocs config generation.
+#
+# @license    MIT License
+#
+# @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
+# ======================================================================================================================
+
 """Tests for the config module.
 
 Covers source and output path resolution, path validation (protected paths,

@@ -1,3 +1,37 @@
+#!/usr/bin/env python3
+
+# ======================================================================================================================
+# @description CLI integration tests for the docsbuildtool Typer application
+#
+# @details     Tests the ``docs`` CLI: help output, version flag, unknown command handling, and help text for all four
+#              subcommands (build, serve, clean, archive). Also verifies the ``main`` entry point is importable. Uses
+#              ``CliRunner`` for all command invocations.
+#
+# ======================================================================================================================
+#
+# @filename   test_cli.py
+# @path       tests/test_cli.py
+#
+# @project    docsbuildtool
+# @product    Docs Build Tool
+# @encoding   utf-8
+#
+# @author     Lio2rz
+# @email      chen.mo@outlook.com
+# @time       2026/05/16 01:26
+#
+# @vcs        git
+# @version    0.0.3
+#
+# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
+# @record     [2026/05/15 17:26] <Carl Chen> feat(build): add HTML build via MkDocs subprocess.
+# @record     [2026/05/15 17:03] <Carl Chen> feat(cli): add Typer-based CLI entrypoint with build/serve/clean/archive co
+#
+# @license    MIT License
+#
+# @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
+# ======================================================================================================================
+
 """Tests for the CLI module.
 
 Covers the top-level Typer app including help output, version display,

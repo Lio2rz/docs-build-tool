@@ -1,3 +1,42 @@
+#!/usr/bin/env python3
+
+# ======================================================================================================================
+# @description Typer-based CLI application exposing the ``docs`` command
+#
+# @details     Defines the ``docs`` Typer application with four subcommands (build, serve, clean, archive) plus global
+#              options (--version, --debug, --verbose). Uses Rich console for colored output. Error handling maps
+#              ``DocsError`` subclasses to POSIX-style exit codes 0-3. The ``main`` function serves as the entry point
+#              for both ``pyproject.toml`` scripts and ``python -m docsbuildtool``.
+#
+# ======================================================================================================================
+#
+# @filename   cli.py
+# @path       src/docsbuildtool/cli.py
+#
+# @project    docsbuildtool
+# @product    Docs Build Tool
+# @encoding   utf-8
+#
+# @author     Lio2rz
+# @email      chen.mo@outlook.com
+# @time       2026/05/16 01:26
+#
+# @vcs        git
+# @version    0.0.7
+#
+# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
+# @record     [2026/05/16 01:19] <Lion> fix(cli): rename _DEBUG to _debug for PEP8 snake_case compliance.
+# @record     [2026/05/15 17:37] <Carl Chen> feat(archive): add ZIP archive command.
+# @record     [2026/05/15 17:34] <Carl Chen> feat(clean): add safe clean command with path protection.
+# @record     [2026/05/15 17:32] <Carl Chen> feat(serve): add mkdocs serve preview command.
+# @record     [2026/05/15 17:26] <Carl Chen> feat(build): add HTML build via MkDocs subprocess.
+# @record     [2026/05/15 17:03] <Carl Chen> feat(cli): add Typer-based CLI entrypoint with build/serve/clean/archive co
+#
+# @license    MIT License
+#
+# @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
+# ======================================================================================================================
+
 """Typer-based command-line interface for docsbuildtool.
 
 Exposes four subcommands — ``build``, ``serve``, ``clean``, and

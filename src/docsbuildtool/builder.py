@@ -1,3 +1,38 @@
+#!/usr/bin/env python3
+
+# ======================================================================================================================
+# @description Build orchestrator for HTML and PDF documentation output
+#
+# @details     Contains ``BuildFormat`` enum (html/pdf/all) and three build functions that invoke MkDocs via subprocess.
+#              ``build_html`` generates static HTML, ``build_pdf`` renders a single PDF via mkdocs-with-pdf, and
+#              ``build_all`` runs both with non-fatal PDF failure. All functions resolve paths through the config layer
+#              and return the output path on success.
+#
+# ======================================================================================================================
+#
+# @filename   builder.py
+# @path       src/docsbuildtool/builder.py
+#
+# @project    docsbuildtool
+# @product    Docs Build Tool
+# @encoding   utf-8
+#
+# @author     Lio2rz
+# @email      chen.mo@outlook.com
+# @time       2026/05/16 01:26
+#
+# @vcs        git
+# @version    0.0.3
+#
+# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
+# @record     [2026/05/15 17:29] <Carl Chen> feat(build): add PDF build via mkdocs-with-pdf plugin.
+# @record     [2026/05/15 17:26] <Carl Chen> feat(build): add HTML build via MkDocs subprocess.
+#
+# @license    MIT License
+#
+# @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
+# ======================================================================================================================
+
 """Build orchestration for HTML and PDF documentation.
 
 Invokes ``mkdocs build`` as a subprocess with generated configuration

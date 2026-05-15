@@ -1,3 +1,40 @@
+#!/usr/bin/env python3
+
+# ======================================================================================================================
+# @description Configuration resolution and MkDocs YAML generation
+#
+# @details     Resolves source and output paths with validation, merges user-provided mkdocs.yml with the project
+#              template, and auto-generates literate-nav summary files when absent. ``generate_mkdocs_config`` produces
+#              an HTML-ready config while ``generate_pdf_config`` adds the mkdocs-with-pdf plugin. All generated configs
+#              use temporary work directories so originals are never mutated.
+#
+# ======================================================================================================================
+#
+# @filename   config.py
+# @path       src/docsbuildtool/config.py
+#
+# @project    docsbuildtool
+# @product    Docs Build Tool
+# @encoding   utf-8
+#
+# @author     Lio2rz
+# @email      chen.mo@outlook.com
+# @time       2026/05/16 01:26
+#
+# @vcs        git
+# @version    0.0.5
+#
+# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
+# @record     [2026/05/16 00:56] <Lion> fix(config): resolve theme custom_dir relative to project root.
+# @record     [2026/05/15 17:29] <Carl Chen> feat(build): add PDF build via mkdocs-with-pdf plugin.
+# @record     [2026/05/15 17:26] <Carl Chen> fix(config): _merge_exclude_docs returns multi-line string for MkDocs compa
+# @record     [2026/05/15 17:11] <Carl Chen> feat(config): add source directory resolution and MkDocs config generation.
+#
+# @license    MIT License
+#
+# @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
+# ======================================================================================================================
+
 """Configuration resolution and mkdocs.yml generation.
 
 Resolves source and output paths, validates them against safety

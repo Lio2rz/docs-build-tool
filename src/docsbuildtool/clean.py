@@ -1,3 +1,36 @@
+#!/usr/bin/env python3
+
+# ======================================================================================================================
+# @description Safe build-artifact cleaner with filesystem path protection
+#
+# @details     ``clean_output`` removes html/, pdf/, and archive/ subdirectories plus any temporary docsbuildtool-* work
+#              directories under the output root. Built-in path protection prevents accidental deletion of the project
+#              root, filesystem root, home directory, or Windows system directory.
+#
+# ======================================================================================================================
+#
+# @filename   clean.py
+# @path       src/docsbuildtool/clean.py
+#
+# @project    docsbuildtool
+# @product    Docs Build Tool
+# @encoding   utf-8
+#
+# @author     Lio2rz
+# @email      chen.mo@outlook.com
+# @time       2026/05/16 01:26
+#
+# @vcs        git
+# @version    0.0.2
+#
+# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
+# @record     [2026/05/15 17:34] <Carl Chen> feat(clean): add safe clean command with path protection.
+#
+# @license    MIT License
+#
+# @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
+# ======================================================================================================================
+
 """Clean build artifacts from the output directory.
 
 Removes the html/, pdf/, and archive/ subdirectories as well as any

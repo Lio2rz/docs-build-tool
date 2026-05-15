@@ -1,3 +1,36 @@
+#!/usr/bin/env python3
+
+# ======================================================================================================================
+# @description ZIP archiver for built documentation output
+#
+# @details     Provides ``archive_zip`` which packages the html/ and pdf/ build output directories into a single ZIP fil
+#              using the standard library ``zipfile`` module with DEFLATE compression. Output is written to
+#              ``<output>/archive/docs.zip``.
+#
+# ======================================================================================================================
+#
+# @filename   archive.py
+# @path       src/docsbuildtool/archive.py
+#
+# @project    docsbuildtool
+# @product    Docs Build Tool
+# @encoding   utf-8
+#
+# @author     Lio2rz
+# @email      chen.mo@outlook.com
+# @time       2026/05/16 01:26
+#
+# @vcs        git
+# @version    0.0.2
+#
+# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
+# @record     [2026/05/15 17:37] <Carl Chen> feat(archive): add ZIP archive command.
+#
+# @license    MIT License
+#
+# @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
+# ======================================================================================================================
+
 """ZIP archiving of built HTML and PDF documentation artifacts.
 
 Collects files from the html/ and pdf/ output subdirectories and

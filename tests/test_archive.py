@@ -1,3 +1,36 @@
+#!/usr/bin/env python3
+
+# ======================================================================================================================
+# @description Unit tests for the ZIP archive module
+#
+# @details     Verifies ``archive_zip`` rejects missing build artifacts, creates a valid ZIP file from HTML and PDF
+#              output, and exposes a CLI subcommand via Typer CliRunner. Uses ``tmp_path`` fixtures for isolated file
+#              creation.
+#
+# ======================================================================================================================
+#
+# @filename   test_archive.py
+# @path       tests/test_archive.py
+#
+# @project    docsbuildtool
+# @product    Docs Build Tool
+# @encoding   utf-8
+#
+# @author     Lio2rz
+# @email      chen.mo@outlook.com
+# @time       2026/05/16 01:26
+#
+# @vcs        git
+# @version    0.0.2
+#
+# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
+# @record     [2026/05/15 17:37] <Carl Chen> feat(archive): add ZIP archive command.
+#
+# @license    MIT License
+#
+# @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
+# ======================================================================================================================
+
 """Tests for the archive_zip module.
 
 Covers archive creation, error handling when no build artifacts exist,

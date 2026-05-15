@@ -1,3 +1,37 @@
+#!/usr/bin/env python3
+
+# ======================================================================================================================
+# @description Unit tests for the HTML/PDF build orchestrator
+#
+# @details     Tests ``BuildFormat`` enum values, minimal HTML builds against fixture docs, CLI-level build invocations
+#              for html/pdf/all formats, and PDF failure handling when dependencies are absent. Uses ``tmp_path`` and
+#              ``CliRunner``.
+#
+# ======================================================================================================================
+#
+# @filename   test_builder.py
+# @path       tests/test_builder.py
+#
+# @project    docsbuildtool
+# @product    Docs Build Tool
+# @encoding   utf-8
+#
+# @author     Lio2rz
+# @email      chen.mo@outlook.com
+# @time       2026/05/16 01:26
+#
+# @vcs        git
+# @version    0.0.3
+#
+# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
+# @record     [2026/05/15 17:29] <Carl Chen> feat(build): add PDF build via mkdocs-with-pdf plugin.
+# @record     [2026/05/15 17:26] <Carl Chen> feat(build): add HTML build via MkDocs subprocess.
+#
+# @license    MIT License
+#
+# @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
+# ======================================================================================================================
+
 """Tests for the builder module.
 
 Covers BuildFormat enum values, the build_html function with minimal fixtures,

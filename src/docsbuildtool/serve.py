@@ -1,3 +1,36 @@
+#!/usr/bin/env python3
+
+# ======================================================================================================================
+# @description Local preview server via ``mkdocs serve`` subprocess
+#
+# @details     ``serve_preview`` runs MkDocs in serve mode for local documentation preview. It blocks until the user
+#              presses Ctrl+C. Output from the MkDocs process is streamed directly to the terminal by design so the
+#              user sees the live-reload URL immediately.
+#
+# ======================================================================================================================
+#
+# @filename   serve.py
+# @path       src/docsbuildtool/serve.py
+#
+# @project    docsbuildtool
+# @product    Docs Build Tool
+# @encoding   utf-8
+#
+# @author     Lio2rz
+# @email      chen.mo@outlook.com
+# @time       2026/05/16 01:26
+#
+# @vcs        git
+# @version    0.0.2
+#
+# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
+# @record     [2026/05/15 17:32] <Carl Chen> feat(serve): add mkdocs serve preview command.
+#
+# @license    MIT License
+#
+# @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
+# ======================================================================================================================
+
 """Live-preview server for documentation.
 
 Starts ``mkdocs serve`` using a generated configuration so users can

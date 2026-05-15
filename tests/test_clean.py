@@ -1,3 +1,36 @@
+#!/usr/bin/env python3
+
+# ======================================================================================================================
+# @description Unit tests for the clean command with path protection
+#
+# @details     Verifies ``clean_output`` handles nonexistent paths gracefully, removes empty output directories, deletes
+#              html/ subdirectories, and integrates with the CLI via Typer CliRunner. Uses ``tmp_path`` for isolated tes
+#              directories.
+#
+# ======================================================================================================================
+#
+# @filename   test_clean.py
+# @path       tests/test_clean.py
+#
+# @project    docsbuildtool
+# @product    Docs Build Tool
+# @encoding   utf-8
+#
+# @author     Lio2rz
+# @email      chen.mo@outlook.com
+# @time       2026/05/16 01:26
+#
+# @vcs        git
+# @version    0.0.2
+#
+# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
+# @record     [2026/05/15 17:34] <Carl Chen> feat(clean): add safe clean command with path protection.
+#
+# @license    MIT License
+#
+# @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
+# ======================================================================================================================
+
 """Tests for the clean module.
 
 Covers the clean_output function behavior for nonexistent, empty, and populated

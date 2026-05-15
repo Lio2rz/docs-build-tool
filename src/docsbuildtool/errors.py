@@ -1,3 +1,36 @@
+#!/usr/bin/env python3
+
+# ======================================================================================================================
+# @description Structured exception hierarchy with POSIX-style exit codes
+#
+# @details     Defines ``ExitCode`` (IntEnum: SUCCESS=0, FAILURE=1, USER_ERROR=2, ENV_MISSING=3) and a ``DocsError`` bas
+#              exception carrying an exit code. Subclasses ``ConfigError``, ``BuildError``, and ``EnvMissingError`` each
+#              map to a specific exit code so the CLI error handler can pass them directly to ``typer.Exit``.
+#
+# ======================================================================================================================
+#
+# @filename   errors.py
+# @path       src/docsbuildtool/errors.py
+#
+# @project    docsbuildtool
+# @product    Docs Build Tool
+# @encoding   utf-8
+#
+# @author     Lio2rz
+# @email      chen.mo@outlook.com
+# @time       2026/05/16 01:26
+#
+# @vcs        git
+# @version    0.0.2
+#
+# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
+# @record     [2026/05/15 17:03] <Carl Chen> feat(cli): add Typer-based CLI entrypoint with build/serve/clean/archive co
+#
+# @license    MIT License
+#
+# @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
+# ======================================================================================================================
+
 """Exception hierarchy and exit codes for docsbuildtool.
 
 Defines a set of structured exit codes and domain-specific exceptions
