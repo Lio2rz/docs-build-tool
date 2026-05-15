@@ -3,6 +3,7 @@ from typing import Annotated
 import typer
 from rich.console import Console
 
+from docsbuildtool.builder import BuildFormat, build_all, build_html, build_pdf
 from docsbuildtool.errors import DocsError, ExitCode
 
 app = typer.Typer(
@@ -54,12 +55,25 @@ def build(
         typer.Option("--output", help="Output root directory for generated files."),
     ] = None,
     format: Annotated[
-        str | None,
+        BuildFormat,
         typer.Option("--format", help="Build format: html, pdf, or all."),
-    ] = None,
+    ] = BuildFormat.html,
 ) -> None:
     """Build documentation to HTML, PDF, or both."""
-    console.print("[yellow]build command is not yet implemented.[/yellow]")
+    if format == BuildFormat.html:
+        html_path = build_html(source, output)
+        console.print(f"[green]HTML built successfully:[/green] {html_path}")
+    elif format == BuildFormat.pdf:
+        pdf_path = build_pdf(source, output)
+        console.print(f"[green]PDF built successfully:[/green] {pdf_path}")
+    elif format == BuildFormat.all:
+        html_path, pdf_output = build_all(source, output)
+        console.print(f"[green]HTML built successfully:[/green] {html_path}")
+        if pdf_output:
+            console.print(f"[green]PDF built successfully:[/green] {pdf_output}")
+        else:
+            console.print("[yellow]Partial success: HTML generated, PDF failed.[/yellow]")
+            raise typer.Exit(code=ExitCode.FAILURE)
 
 
 @app.command()

@@ -33,10 +33,9 @@ def test_build_help() -> None:
     assert "--output" in result.stdout
 
 
-def test_build_placeholder() -> None:
-    result = runner.invoke(app, ["build"])
-    assert result.exit_code == 0
-    assert "not yet implemented" in result.stdout
+def test_build_no_source() -> None:
+    result = runner.invoke(app, ["build", "--source", "/no/such/path"])
+    assert result.exit_code != 0
 
 
 def test_serve_help() -> None:
