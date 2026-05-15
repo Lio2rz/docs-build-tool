@@ -116,6 +116,14 @@ def generate_mkdocs_config(source: Path, output: Path) -> ResolvedConfig:
     merged["docs_dir"] = source.resolve().as_posix()
     merged["site_dir"] = output.resolve().as_posix()
 
+    # Resolve theme custom_dir relative to project root so it works
+    # when MkDocs reads the config from a temp directory.
+    theme = merged.get("theme")
+    if isinstance(theme, dict) and theme.get("custom_dir"):
+        custom_dir = Path(theme["custom_dir"])
+        if not custom_dir.is_absolute():
+            theme["custom_dir"] = (PROJECT_ROOT / custom_dir).resolve().as_posix()
+
     resolved_summary: Path | None = None
     source_summary = source / "summary.md"
     if source_summary.exists():
@@ -176,6 +184,14 @@ def generate_pdf_config(source: Path, output: Path) -> ResolvedConfig:
     merged.update(user_config)
     merged["docs_dir"] = source.resolve().as_posix()
     merged["site_dir"] = output.resolve().as_posix()
+
+    # Resolve theme custom_dir relative to project root so it works
+    # when MkDocs reads the config from a temp directory.
+    theme = merged.get("theme")
+    if isinstance(theme, dict) and theme.get("custom_dir"):
+        custom_dir = Path(theme["custom_dir"])
+        if not custom_dir.is_absolute():
+            theme["custom_dir"] = (PROJECT_ROOT / custom_dir).resolve().as_posix()
 
     resolved_summary: Path | None = None
     source_summary = source / "summary.md"
