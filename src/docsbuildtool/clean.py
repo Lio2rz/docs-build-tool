@@ -24,7 +24,7 @@
 # @version    0.0.2
 #
 # @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
-#              [2026/05/15 17:34] <Carl Chen> feat(clean): add safe clean command with path protection.
+#             [2026/05/15 17:34] <Carl Chen> feat(clean): add safe clean command with path protection.
 #
 # @license    MIT License
 #
