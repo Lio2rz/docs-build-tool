@@ -82,7 +82,7 @@ def _generate_summary(source: Path, work_dir: Path) -> Path:
     return summary_path
 
 
-def _merge_exclude_docs(existing: str | list[str] | None, additions: list[str]) -> list[str]:
+def _merge_exclude_docs(existing: str | list[str] | None, additions: list[str]) -> str:
     if existing is None:
         result: list[str] = []
     elif isinstance(existing, str):
@@ -92,7 +92,7 @@ def _merge_exclude_docs(existing: str | list[str] | None, additions: list[str]) 
     for a in additions:
         if a not in result:
             result.append(a)
-    return result
+    return "\n".join(f"  {r}" for r in result)
 
 
 def generate_mkdocs_config(source: Path, output: Path) -> ResolvedConfig:
