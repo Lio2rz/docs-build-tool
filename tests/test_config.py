@@ -1,3 +1,10 @@
+"""Tests for the config module.
+
+Covers source and output path resolution, path validation (protected paths,
+equality checks), and mkdocs config generation including user-provided configs,
+auto-generated summaries, and paths with spaces.
+"""
+
 from pathlib import Path
 
 import pytest
@@ -12,12 +19,14 @@ from docsbuildtool.errors import ConfigError
 
 
 def test_resolve_source_default() -> None:
+    """Tests that resolve_source with None returns the default 'docs' directory."""
     src = resolve_source(None)
     assert src.name == "docs"
     assert src.exists()
 
 
 def test_resolve_source_custom(tmp_path: Path) -> None:
+    """Tests that resolve_source returns the resolved path to a custom source directory."""
     custom = tmp_path / "my-docs"
     custom.mkdir()
     src = resolve_source(str(custom))
@@ -25,11 +34,13 @@ def test_resolve_source_custom(tmp_path: Path) -> None:
 
 
 def test_resolve_source_not_exists() -> None:
+    """Tests that resolve_source raises ConfigError for a nonexistent path."""
     with pytest.raises(ConfigError, match="does not exist"):
         resolve_source("/nonexistent/path/abc123xyz")
 
 
 def test_resolve_source_is_file(tmp_path: Path) -> None:
+    """Tests that resolve_source raises ConfigError when the path is a file, not a directory."""
     f = tmp_path / "file.txt"
     f.write_text("hello")
     with pytest.raises(ConfigError, match="not a directory"):
@@ -37,11 +48,13 @@ def test_resolve_source_is_file(tmp_path: Path) -> None:
 
 
 def test_resolve_output_default() -> None:
+    """Tests that resolve_output with None returns the default 'site' directory name."""
     out = resolve_output(None)
     assert out.name == "site"
 
 
 def test_validate_output_equals_source(tmp_path: Path) -> None:
+    """Tests that validate_paths raises ConfigError when output equals source."""
     src = tmp_path / "src"
     src.mkdir()
     with pytest.raises(ConfigError, match="cannot be the same as source"):
@@ -49,15 +62,18 @@ def test_validate_output_equals_source(tmp_path: Path) -> None:
 
 
 def test_validate_output_is_project_root() -> None:
+    """Tests that validate_paths raises ConfigError when output is the project root (protected)."""
     with pytest.raises(ConfigError, match="protected path"):
         validate_paths(Path("docs"), Path.cwd())
 
 
 def test_generate_config_with_user_mkdocs(tmp_path: Path) -> None:
+    """Tests generate_mkdocs_config when the user provides a custom mkdocs.yml and summary."""
     source = tmp_path / "docs"
     source.mkdir()
     (source / "index.md").write_text("# Test\n")
     (source / "summary.md").write_text("* [Home](index.md)\n")
+    # User-provided mkdocs config.
     (source / "mkdocs.yml").write_text("site_name: Custom\n")
 
     output = tmp_path / "site"
@@ -68,6 +84,7 @@ def test_generate_config_with_user_mkdocs(tmp_path: Path) -> None:
 
 
 def test_generate_config_without_summary(tmp_path: Path) -> None:
+    """Tests generate_mkdocs_config auto-generates a summary.md when none is provided."""
     source = tmp_path / "docs"
     source.mkdir()
     (source / "index.md").write_text("# Test\n")
@@ -81,6 +98,7 @@ def test_generate_config_without_summary(tmp_path: Path) -> None:
 
 
 def test_generate_config_output_structure(tmp_path: Path) -> None:
+    """Tests that the generated mkdocs config includes correct docs_dir, site_dir, and literate-nav plugin."""
     source = tmp_path / "docs"
     source.mkdir()
     (source / "index.md").write_text("# Test\n")
@@ -98,16 +116,19 @@ def test_generate_config_output_structure(tmp_path: Path) -> None:
         config = yaml.safe_load(f)
     assert config["docs_dir"] == source.resolve().as_posix()
     assert config["site_dir"] == output.resolve().as_posix()
+    # Verify the literate-nav plugin is present for navigation.
     assert config["use_directory_urls"] is False
     assert any("literate-nav" in (p if isinstance(p, str) else str(p)) for p in (config.get("plugins") or []))
 
 
 def test_validate_output_is_home() -> None:
+    """Tests that validate_paths raises ConfigError when output is the user's home directory (protected)."""
     with pytest.raises(ConfigError, match="protected path"):
         validate_paths(Path("docs"), Path.home())
 
 
 def test_source_with_spaces(tmp_path: Path) -> None:
+    """Tests that generate_mkdocs_config works correctly with paths containing spaces."""
     source = tmp_path / "my docs source"
     source.mkdir()
     (source / "index.md").write_text("# Test\n")

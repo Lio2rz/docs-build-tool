@@ -1,3 +1,10 @@
+"""Build orchestration for HTML and PDF documentation.
+
+Invokes ``mkdocs build`` as a subprocess with generated configuration
+files for each output format.  Also provides a convenience function
+that builds both formats in one call.
+"""
+
 from __future__ import annotations
 
 import subprocess
@@ -16,12 +23,32 @@ from docsbuildtool.errors import BuildError, EnvMissingError
 
 
 class BuildFormat(StrEnum):
+    """Supported documentation build formats."""
+
     html = "html"
+    """Build HTML output only."""
     pdf = "pdf"
+    """Build PDF output only."""
     all = "all"
+    """Build both HTML and PDF."""
 
 
 def build_html(source_path: str | None, output_path: str | None) -> Path:
+    """Build HTML documentation via MkDocs.
+
+    Args:
+        source_path: Path to the source directory containing Markdown
+            files.  Defaults to ``docs/``.
+        output_path: Path to the output root directory.  Defaults to
+            ``site/``.
+
+    Returns:
+        The :class:`Path` to the generated HTML output directory.
+
+    Raises:
+        BuildError: If the MkDocs subprocess fails or if ``index.html``
+            is not found after the build completes.
+    """
     source = resolve_source(source_path)
     output = resolve_output(output_path)
     resolved = generate_mkdocs_config(source, output)
@@ -40,6 +67,7 @@ def build_html(source_path: str | None, output_path: str | None) -> Path:
         stderr = result.stderr.strip() or result.stdout.strip()
         raise BuildError(f"MkDocs HTML build failed:\n{stderr}")
 
+    # Verify the build actually produced output.
     if not (html_output / "index.html").exists():
         raise BuildError(f"HTML build completed but index.html not found at {html_output}")
 
@@ -47,6 +75,23 @@ def build_html(source_path: str | None, output_path: str | None) -> Path:
 
 
 def build_pdf(source_path: str | None, output_path: str | None) -> Path:
+    """Build PDF documentation via MkDocs with the ``with-pdf`` plugin.
+
+    Args:
+        source_path: Path to the source directory containing Markdown
+            files.  Defaults to ``docs/``.
+        output_path: Path to the output root directory.  Defaults to
+            ``site/``.
+
+    Returns:
+        The :class:`Path` to the generated PDF file.
+
+    Raises:
+        EnvMissingError: If PDF dependencies (e.g. the ``with-pdf``
+            plugin) are not installed.
+        BuildError: If the MkDocs subprocess fails or the resulting
+            PDF is missing or empty.
+    """
     source = resolve_source(source_path)
     output = resolve_output(output_path)
     resolved = generate_pdf_config(source, output)
@@ -63,6 +108,7 @@ def build_pdf(source_path: str | None, output_path: str | None) -> Path:
 
     if result.returncode != 0:
         stderr = result.stderr.strip() or result.stdout.strip()
+        # Distinguish missing dependency errors from general build failures.
         if "No module named" in stderr or "ModuleNotFoundError" in stderr:
             raise EnvMissingError(f"PDF dependencies missing. Run: poetry install --with doc-group\n\n{stderr}")
         raise BuildError(f"MkDocs PDF build failed:\n{stderr}")
@@ -70,6 +116,7 @@ def build_pdf(source_path: str | None, output_path: str | None) -> Path:
     pdf_file = pdf_output_dir / "docs.pdf"
     if not pdf_file.exists():
         raise BuildError(f"PDF build completed but {pdf_file} not found")
+    # Guard against plugin bugs that produce a zero-byte file.
     if pdf_file.stat().st_size == 0:
         raise BuildError(f"PDF build produced empty file: {pdf_file}")
 
@@ -77,10 +124,24 @@ def build_pdf(source_path: str | None, output_path: str | None) -> Path:
 
 
 def build_all(source_path: str | None, output_path: str | None) -> tuple[Path, Path | None]:
+    """Build both HTML and PDF documentation.
+
+    HTML is always built first.  If PDF fails, the HTML result is still
+    returned and the PDF result is ``None`` (partial success).
+
+    Args:
+        source_path: See :func:`build_html`.
+        output_path: See :func:`build_html`.
+
+    Returns:
+        A ``(html_path, pdf_path)`` tuple where ``pdf_path`` may be
+        ``None`` if the PDF build failed.
+    """
     html_path = build_html(source_path, output_path)
     pdf_path = None
     try:
         pdf_path = build_pdf(source_path, output_path)
     except BuildError:
+        # Swallow PDF failures so the caller can report partial success.
         pass
     return html_path, pdf_path

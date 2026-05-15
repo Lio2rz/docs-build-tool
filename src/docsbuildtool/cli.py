@@ -1,3 +1,10 @@
+"""Typer-based command-line interface for docsbuildtool.
+
+Exposes four subcommands — ``build``, ``serve``, ``clean``, and
+``archive`` — and a top-level ``docs`` application with global options
+for version, debug, and verbose output.
+"""
+
 from typing import Annotated
 
 import typer
@@ -15,10 +22,17 @@ app = typer.Typer(
     no_args_is_help=True,
 )
 console = Console()
+# Module-level flag so the exception handler can decide whether to
+# print a full traceback.
 _debug = False
 
 
 def _version_callback(value: bool) -> None:
+    """Print the package version and exit.
+
+    Intended as an eager Typer callback so ``--version`` is resolved
+    before any other arguments.
+    """
     if value:
         from docsbuildtool import __version__
 
@@ -41,8 +55,10 @@ def _global(
         typer.Option("--verbose", "-v", help="Enable verbose output."),
     ] = False,
 ) -> None:
+    """Global options applied to all subcommands."""
     global _debug
     _debug = debug
+    # --verbose implies --debug
     if verbose:
         _debug = True
 
@@ -75,6 +91,7 @@ def build(
         if pdf_output:
             console.print(f"[green]PDF built successfully:[/green] {pdf_output}")
         else:
+            # Partial success: HTML worked but PDF did not.
             console.print("[yellow]Partial success: HTML generated, PDF failed.[/yellow]")
             raise typer.Exit(code=ExitCode.FAILURE)
 
@@ -124,16 +141,23 @@ def archive(
         console.print(f"[red]Unsupported archive format: {format}[/red]")
         raise typer.Exit(code=ExitCode.USER_ERROR)
     zip_path = archive_zip(output)
+    # Convert bytes to human-readable MiB for the user.
     size_mb = zip_path.stat().st_size / (1024 * 1024)
     console.print(f"[green]Archive created:[/green] {zip_path} ({size_mb:.1f} MB)")
 
 
 def _handle_exception(exc: BaseException) -> None:
+    """Map a raised exception to a Typer exit with the correct exit code.
+
+    `DocsError` instances carry their own exit code.  Unexpected errors
+    are printed with an optional traceback (controlled by ``--debug``).
+    """
     if isinstance(exc, DocsError):
         console.print(f"[red]Error:[/red] {exc}")
         if _debug:
             console.print_exception()
         raise typer.Exit(code=int(exc.exit_code))
+    # Re-raise Typer's own Exit exceptions so they propagate normally.
     if isinstance(exc, typer.Exit):
         raise
     console.print(f"[red]Unexpected error:[/red] {exc}")
@@ -143,6 +167,11 @@ def _handle_exception(exc: BaseException) -> None:
 
 
 def main() -> None:
+    """Run the CLI application with top-level exception handling.
+
+    This is the entry point referenced by ``pyproject.toml``'s
+    ``[project.scripts]`` and by ``python -m docsbuildtool``.
+    """
     try:
         app()
     except Exception as exc:

@@ -1,11 +1,20 @@
+"""Tests for the CLI module.
+
+Covers the top-level Typer app including help output, version display,
+unknown command handling, and subcommand help screens for build, serve,
+clean, and archive.
+"""
+
 from typer.testing import CliRunner
 
 from docsbuildtool.cli import app
 
+# Reusable CLI test runner instance.
 runner = CliRunner()
 
 
 def test_help() -> None:
+    """Tests that --help lists all available subcommands (build, serve, clean, archive)."""
     result = runner.invoke(app, ["--help"])
     assert result.exit_code == 0
     assert "build" in result.stdout
@@ -15,17 +24,20 @@ def test_help() -> None:
 
 
 def test_version() -> None:
+    """Tests that --version prints the version string."""
     result = runner.invoke(app, ["--version"])
     assert result.exit_code == 0
     assert "docs v" in result.stdout
 
 
 def test_unknown_command() -> None:
+    """Tests that an unknown subcommand returns exit code 2 (Typer usage error)."""
     result = runner.invoke(app, ["unknown-cmd"])
     assert result.exit_code == 2
 
 
 def test_build_help() -> None:
+    """Tests that 'build --help' shows the expected build options."""
     result = runner.invoke(app, ["build", "--help"])
     assert result.exit_code == 0
     assert "--format" in result.stdout
@@ -34,29 +46,34 @@ def test_build_help() -> None:
 
 
 def test_build_no_source() -> None:
+    """Tests that building with a nonexistent source path returns a non-zero exit code."""
     result = runner.invoke(app, ["build", "--source", "/no/such/path"])
     assert result.exit_code != 0
 
 
 def test_serve_help() -> None:
+    """Tests that 'serve --help' shows the --source option."""
     result = runner.invoke(app, ["serve", "--help"])
     assert result.exit_code == 0
     assert "--source" in result.stdout
 
 
 def test_clean_help() -> None:
+    """Tests that 'clean --help' shows the --output option."""
     result = runner.invoke(app, ["clean", "--help"])
     assert result.exit_code == 0
     assert "--output" in result.stdout
 
 
 def test_archive_help() -> None:
+    """Tests that 'archive --help' shows the --format option."""
     result = runner.invoke(app, ["archive", "--help"])
     assert result.exit_code == 0
     assert "--format" in result.stdout
 
 
 def test_main_importable() -> None:
+    """Tests that the main entry point function is importable and callable."""
     from docsbuildtool.cli import main
 
     assert callable(main)
