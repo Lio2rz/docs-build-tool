@@ -24,8 +24,8 @@
 # @version    0.0.3
 #
 # @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
-# @record     [2026/05/15 17:26] <Carl Chen> feat(build): add HTML build via MkDocs subprocess.
-# @record     [2026/05/15 17:03] <Carl Chen> feat(cli): add Typer-based CLI entrypoint with build/serve/clean/archive co
+#              [2026/05/15 17:26] <Carl Chen> feat(build): add HTML build via MkDocs subprocess.
+#              [2026/05/15 17:03] <Carl Chen> feat(cli): add Typer-based CLI entrypoint with build/serve/clean/archive c
 #
 # @license    MIT License
 #

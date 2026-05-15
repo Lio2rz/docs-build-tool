@@ -25,10 +25,10 @@
 # @version    0.0.5
 #
 # @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
-# @record     [2026/05/16 00:56] <Lion> fix(config): resolve theme custom_dir relative to project root.
-# @record     [2026/05/15 17:29] <Carl Chen> feat(build): add PDF build via mkdocs-with-pdf plugin.
-# @record     [2026/05/15 17:26] <Carl Chen> fix(config): _merge_exclude_docs returns multi-line string for MkDocs compa
-# @record     [2026/05/15 17:11] <Carl Chen> feat(config): add source directory resolution and MkDocs config generation.
+#              [2026/05/16 00:56] <Lion> fix(config): resolve theme custom_dir relative to project root.
+#              [2026/05/15 17:29] <Carl Chen> feat(build): add PDF build via mkdocs-with-pdf plugin.
+#              [2026/05/15 17:26] <Carl Chen> fix(config): _merge_exclude_docs returns multi-line string for MkDocs comp
+#              [2026/05/15 17:11] <Carl Chen> feat(config): add source directory resolution and MkDocs config generation
 #
 # @license    MIT License
 #

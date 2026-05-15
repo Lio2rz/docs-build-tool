@@ -24,7 +24,7 @@
 # @version    0.0.2
 #
 # @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
-# @record     [2026/05/15 17:11] <Carl Chen> feat(config): add source directory resolution and MkDocs config generation.
+#              [2026/05/15 17:11] <Carl Chen> feat(config): add source directory resolution and MkDocs config generation
 #
 # @license    MIT License
 #
