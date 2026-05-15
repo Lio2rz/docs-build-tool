@@ -15,7 +15,7 @@ app = typer.Typer(
     no_args_is_help=True,
 )
 console = Console()
-_DEBUG = False
+_debug = False
 
 
 def _version_callback(value: bool) -> None:
@@ -41,10 +41,10 @@ def _global(
         typer.Option("--verbose", "-v", help="Enable verbose output."),
     ] = False,
 ) -> None:
-    global _DEBUG
-    _DEBUG = debug
+    global _debug
+    _debug = debug
     if verbose:
-        _DEBUG = True
+        _debug = True
 
 
 @app.command()
@@ -131,13 +131,13 @@ def archive(
 def _handle_exception(exc: BaseException) -> None:
     if isinstance(exc, DocsError):
         console.print(f"[red]Error:[/red] {exc}")
-        if _DEBUG:
+        if _debug:
             console.print_exception()
         raise typer.Exit(code=int(exc.exit_code))
     if isinstance(exc, typer.Exit):
         raise
     console.print(f"[red]Unexpected error:[/red] {exc}")
-    if _DEBUG:
+    if _debug:
         console.print_exception()
     raise typer.Exit(code=ExitCode.FAILURE)
 
