@@ -1,4 +1,18 @@
-# docsbuildtool
+# Docs Build Tool
+
+[![Python](https://img.shields.io/badge/python-%3E%3D3.13-3776AB?logo=python)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-MIT-yellow)](https://github.com/Lio2rz/docs-build-tool/blob/main/LICENSE)
+[![Typer](https://img.shields.io/badge/typer-0.15-4B8BBE)](https://typer.tiangolo.com/)
+[![Rich](https://img.shields.io/badge/rich-15.0.0-4B8BBE)](https://rich.readthedocs.io/)
+[![MkDocs](https://img.shields.io/badge/mkdocs-1.6.1-4B8BBE)](https://www.mkdocs.org/)
+[![Material](https://img.shields.io/badge/mkdocs--material-9.6-4B8BBE)](https://squidfunk.github.io/mkdocs-material/)
+[![PDF](https://img.shields.io/badge/mkdocs--with--pdf-0.9.3-4B8BBE)](https://github.com/orzih/mkdocs-with-pdf)
+[![pytest](https://img.shields.io/badge/pytest-35%20passed-4B8BBE)](https://docs.pytest.org/)
+[![Black](https://img.shields.io/badge/code%20style-black-000000)](https://github.com/psf/black)
+[![Ruff](https://img.shields.io/badge/lint-ruff-261230)](https://docs.astral.sh/ruff/)
+[![mypy](https://img.shields.io/badge/type%20check-mypy-blue)](https://mypy-lang.org/)
+[![Lint CI](https://github.com/Lio2rz/docs-build-tool/actions/workflows/lint.yml/badge.svg)](https://github.com/Lio2rz/docs-build-tool/actions/workflows/lint.yml)
+[![Test CI](https://github.com/Lio2rz/docs-build-tool/actions/workflows/tests.yml/badge.svg)](https://github.com/Lio2rz/docs-build-tool/actions/workflows/tests.yml)
 
 <!-- BEGIN: auto-generated -->
 
