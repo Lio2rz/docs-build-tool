@@ -35,15 +35,6 @@
 # @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
 # ======================================================================================================================
 
-"""Configuration resolution and mkdocs.yml generation.
-
-Resolves source and output paths, validates them against safety
-constraints, and generates temporary MkDocs configuration files for
-both HTML and PDF builds.  The generated configs merge a project-level
-``mkdocs.yml`` template with any user overrides found in the source
-directory.
-"""
-
 from __future__ import annotations
 
 import os

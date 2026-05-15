@@ -31,12 +31,6 @@
 # @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
 # ======================================================================================================================
 
-"""Clean build artifacts from the output directory.
-
-Removes the html/, pdf/, and archive/ subdirectories as well as any
-temporary work directories created by docsbuildtool.
-"""
-
 from __future__ import annotations
 
 import shutil

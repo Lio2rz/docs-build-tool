@@ -37,13 +37,6 @@
 # @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
 # ======================================================================================================================
 
-"""Typer-based command-line interface for docsbuildtool.
-
-Exposes four subcommands — ``build``, ``serve``, ``clean``, and
-``archive`` — and a top-level ``docs`` application with global options
-for version, debug, and verbose output.
-"""
-
 from typing import Annotated
 
 import typer

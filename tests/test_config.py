@@ -31,13 +31,6 @@
 # @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
 # ======================================================================================================================
 
-"""Tests for the config module.
-
-Covers source and output path resolution, path validation (protected paths,
-equality checks), and mkdocs config generation including user-provided configs,
-auto-generated summaries, and paths with spaces.
-"""
-
 from pathlib import Path
 
 import pytest

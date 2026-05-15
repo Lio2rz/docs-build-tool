@@ -32,13 +32,6 @@
 # @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
 # ======================================================================================================================
 
-"""Tests for the CLI module.
-
-Covers the top-level Typer app including help output, version display,
-unknown command handling, and subcommand help screens for build, serve,
-clean, and archive.
-"""
-
 from typer.testing import CliRunner
 
 from docsbuildtool.cli import app

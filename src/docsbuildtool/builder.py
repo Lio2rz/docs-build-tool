@@ -33,13 +33,6 @@
 # @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
 # ======================================================================================================================
 
-"""Build orchestration for HTML and PDF documentation.
-
-Invokes ``mkdocs build`` as a subprocess with generated configuration
-files for each output format.  Also provides a convenience function
-that builds both formats in one call.
-"""
-
 from __future__ import annotations
 
 import subprocess

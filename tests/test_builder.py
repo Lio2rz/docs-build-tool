@@ -32,12 +32,6 @@
 # @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
 # ======================================================================================================================
 
-"""Tests for the builder module.
-
-Covers BuildFormat enum values, the build_html function with minimal fixtures,
-and CLI build commands with various format flags including partial success scenarios.
-"""
-
 from pathlib import Path
 
 from typer.testing import CliRunner

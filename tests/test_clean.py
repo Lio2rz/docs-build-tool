@@ -31,12 +31,6 @@
 # @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
 # ======================================================================================================================
 
-"""Tests for the clean module.
-
-Covers the clean_output function behavior for nonexistent, empty, and populated
-output directories, as well as the CLI clean command.
-"""
-
 from pathlib import Path
 
 from typer.testing import CliRunner

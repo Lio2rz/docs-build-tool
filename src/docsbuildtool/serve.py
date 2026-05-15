@@ -31,12 +31,6 @@
 # @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
 # ======================================================================================================================
 
-"""Live-preview server for documentation.
-
-Starts ``mkdocs serve`` using a generated configuration so users can
-preview their documentation in a browser with hot-reload.
-"""
-
 from __future__ import annotations
 
 import subprocess

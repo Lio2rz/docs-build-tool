@@ -31,13 +31,6 @@
 # @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
 # ======================================================================================================================
 
-"""Exception hierarchy and exit codes for docsbuildtool.
-
-Defines a set of structured exit codes and domain-specific exceptions
-so that callers (including the CLI) can map errors to meaningful
-process exit codes.
-"""
-
 from enum import IntEnum
 
 
@@ -62,6 +55,12 @@ class DocsError(Exception):
     """
 
     def __init__(self, message: str, exit_code: ExitCode = ExitCode.FAILURE) -> None:
+        """Initialize the exception with a message and exit code.
+
+        Args:
+            message: Human-readable error description.
+            exit_code: The :class:`ExitCode` to return to the shell (default FAILURE).
+        """
         super().__init__(message)
         self.exit_code = exit_code
 
@@ -70,6 +69,7 @@ class ConfigError(DocsError):
     """Raised when configuration is missing, invalid, or inconsistent."""
 
     def __init__(self, message: str) -> None:
+        """Initialize with ``USER_ERROR`` exit code."""
         super().__init__(message, ExitCode.USER_ERROR)
 
 
@@ -77,6 +77,7 @@ class BuildError(DocsError):
     """Raised when a build step (HTML or PDF) fails."""
 
     def __init__(self, message: str) -> None:
+        """Initialize with ``FAILURE`` exit code."""
         super().__init__(message, ExitCode.FAILURE)
 
 
@@ -84,4 +85,5 @@ class EnvMissingError(DocsError):
     """Raised when a required external tool or Python package is not installed."""
 
     def __init__(self, message: str) -> None:
+        """Initialize with ``ENV_MISSING`` exit code."""
         super().__init__(message, ExitCode.ENV_MISSING)

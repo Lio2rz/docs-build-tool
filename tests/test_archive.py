@@ -31,12 +31,6 @@
 # @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
 # ======================================================================================================================
 
-"""Tests for the archive_zip module.
-
-Covers archive creation, error handling when no build artifacts exist,
-and the CLI archive command integration.
-"""
-
 import zipfile
 from pathlib import Path
 

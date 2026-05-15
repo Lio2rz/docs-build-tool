@@ -31,12 +31,6 @@
 # @copyright  Copyright (c) 2026 Lio2rz. All rights reserved.
 # ======================================================================================================================
 
-"""ZIP archiving of built HTML and PDF documentation artifacts.
-
-Collects files from the html/ and pdf/ output subdirectories and
-bundles them into a single ``docs.zip`` file in the archive/ directory.
-"""
-
 from __future__ import annotations
 
 import zipfile
