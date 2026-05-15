@@ -24,13 +24,13 @@
 # @vcs        git
 # @version    0.0.7
 #
-# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
-#             [2026/05/16 01:19] <Lion> fix(cli): rename _DEBUG to _debug for PEP8 snake_case compliance.
-#             [2026/05/15 17:37] <Carl Chen> feat(archive): add ZIP archive command.
-#             [2026/05/15 17:34] <Carl Chen> feat(clean): add safe clean command with path protection.
-#             [2026/05/15 17:32] <Carl Chen> feat(serve): add mkdocs serve preview command.
-#             [2026/05/15 17:26] <Carl Chen> feat(build): add HTML build via MkDocs subprocess.
-#             [2026/05/15 17:03] <Carl Chen> feat(cli): add Typer-based CLI entrypoint with build/serve/clean/archive c
+# @record     [2026/05/16 01:26] <Lio2rz> docs(src,tests): add module docstrings, function docstrings, and inline comments
+#             [2026/05/16 01:19] <Lio2rz> fix(cli): rename _DEBUG to _debug for PEP8 snake_case compliance.
+#             [2026/05/15 17:37] <Lio2rz> feat(archive): add ZIP archive command.
+#             [2026/05/15 17:34] <Lio2rz> feat(clean): add safe clean command with path protection.
+#             [2026/05/15 17:32] <Lio2rz> feat(serve): add mkdocs serve preview command.
+#             [2026/05/15 17:26] <Lio2rz> feat(build): add HTML build via MkDocs subprocess.
+#             [2026/05/15 17:03] <Lio2rz> feat(cli): add Typer-based CLI entrypoint with build/serve/clean/archive c
 #
 # @license    MIT License
 #

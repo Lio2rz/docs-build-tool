@@ -22,8 +22,8 @@
 # @vcs        git
 # @version    0.0.2
 #
-# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
-#             [2026/05/14 11:24] <Carl Chen> Create application.
+# @record     [2026/05/16 01:26] <Lio2rz> docs(src,tests): add module docstrings, function docstrings, and inline comments
+#             [2026/05/14 11:24] <Lio2rz> Create application.
 #
 # @license    MIT License
 #

@@ -24,9 +24,9 @@
 # @vcs        git
 # @version    0.0.3
 #
-# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
-#             [2026/05/15 17:29] <Carl Chen> feat(build): add PDF build via mkdocs-with-pdf plugin.
-#             [2026/05/15 17:26] <Carl Chen> feat(build): add HTML build via MkDocs subprocess.
+# @record     [2026/05/16 01:26] <Lio2rz> docs(src,tests): add module docstrings, function docstrings, and inline comments
+#             [2026/05/15 17:29] <Lio2rz> feat(build): add PDF build via mkdocs-with-pdf plugin.
+#             [2026/05/15 17:26] <Lio2rz> feat(build): add HTML build via MkDocs subprocess.
 #
 # @license    MIT License
 #

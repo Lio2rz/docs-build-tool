@@ -22,8 +22,8 @@
 # @vcs        git
 # @version    0.0.2
 #
-# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
-#             [2026/05/14 14:53] <Carl Chen> update coding standards and add linting configuration.
+# @record     [2026/05/16 01:26] <Lio2rz> docs(src,tests): add module docstrings, function docstrings, and inline comments
+#             [2026/05/14 14:53] <Lio2rz> update coding standards and add linting configuration.
 #
 # @license    MIT License
 #

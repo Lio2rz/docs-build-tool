@@ -23,8 +23,8 @@
 # @vcs        git
 # @version    0.0.2
 #
-# @record     [2026/05/16 01:26] <Lion> docs(src,tests): add module docstrings, function docstrings, and inline comments
-#             [2026/05/15 17:32] <Carl Chen> feat(serve): add mkdocs serve preview command.
+# @record     [2026/05/16 01:26] <Lio2rz> docs(src,tests): add module docstrings, function docstrings, and inline comments
+#             [2026/05/15 17:32] <Lio2rz> feat(serve): add mkdocs serve preview command.
 #
 # @license    MIT License
 #
