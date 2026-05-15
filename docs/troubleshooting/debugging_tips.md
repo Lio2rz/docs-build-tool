@@ -2,29 +2,47 @@
 
 <!-- BEGIN: auto-generated -->
 
-## 依赖问题
+## 类型检查
 
 ```powershell
-poetry check --lock
-poetry show --only dev-group --tree
-poetry show --only doc-group --tree
-poetry show --only test-group --tree
+poetry run mypy src/
 ```
 
-## 代码检查
+## 代码风格
 
 ```powershell
 poetry run ruff check .
+poetry run ruff format --check .
 ```
 
 ## 测试
 
 ```powershell
-poetry run pytest -ra
+poetry run pytest -v --tb=short        # 详细输出
+poetry run pytest -vv --tb=long        # 完整 traceback
+poetry run pytest --cov=docsbuildtool  # 覆盖率
 ```
 
-## 构建问题
+## 构建验证
 
-<!-- TODO: 实现构建命令后，补充最小复现输入和 verbose 调试参数。 -->
+```powershell
+poetry run mkdocs build -f mkdocs.yml --strict  # 严格模式（断链报错）
+poetry run docs build --verbose                 # 详细构建输出
+poetry run docs build --format all --debug      # 全量构建 + 调试
+```
+
+## 依赖诊断
+
+```powershell
+poetry run python -c "import mkdocs; print(mkdocs.__version__)"
+poetry run python -c "import yaml; print(yaml.__version__)"
+poetry check --lock
+```
+
+## 清理
+
+```powershell
+poetry run docs clean --output site/    # 清理构建产物
+```
 
 <!-- END: auto-generated -->

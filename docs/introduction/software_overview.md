@@ -2,23 +2,23 @@
 
 <!-- BEGIN: auto-generated -->
 
-`docsbuildtool` 是一个由 Poetry 管理依赖的 Python 文档构建项目，目标是把指定目录下的结构化 Markdown 文档转换为可发布的静态 HTML 文档，并支持生成 PDF 文档。
+`docsbuildtool` 是一个由 Poetry 管理依赖的 Python CLI 文档构建工具（v0.1.0），将结构化 Markdown 目录转换为静态 HTML 和 PDF 交付物。项目基于 MkDocs 生态（mkdocs-material + literate-nav + section-index + with-pdf），使用 Typer + Rich 提供命令行界面。
 
 ## 目标用户
 
 - 需要维护内部开发文档、项目文档或知识库的开发团队。
 - 希望用 Markdown 作为源格式，并生成静态站点或 PDF 交付物的文档维护者。
-- 希望在命令行或自动化流程中批量构建文档的工程团队。
+- 希望在命令行或 CI/CD 流水线中批量构建文档的工程团队。
 
 ## 核心能力
 
 | 能力 | 当前状态 | 说明 |
 | --- | --- | --- |
-| Markdown 目录输入 | 规划中 | 输入应是结构化 Markdown 目录，后续实现需要支持目录发现和导航顺序。 |
-| HTML 静态站点生成 | 规划中 | 使用 MkDocs 生态作为基础。 |
-| PDF 文档生成 | 规划中 | 当前依赖规划使用 `mkdocs-with-pdf`，实现时应保持可替换性。 |
-| CLI | 规划中 | `pyproject.toml` 已包含 `typer`，但当前尚未实现 CLI 模块。 |
-| 测试 | 待补充 | `tests/` 目录存在，但暂无测试用例。 |
+| Markdown 目录输入 | 已实现 | `resolve_source()` 自动发现 `docs/` 目录，支持 `--source` 自定义路径。 |
+| HTML 静态站点生成 | 已实现 | 通过子进程调用 `mkdocs build`，使用 mkdocs-material 主题，输出至 `<output>/html/`。 |
+| PDF 文档生成 | 已实现 | 通过 `mkdocs-with-pdf` 插件生成，输出至 `<output>/pdf/docs.pdf`。PDF 失败不阻塞 HTML 构建。 |
+| CLI | 已实现 | 基于 Typer + Rich，提供 4 个子命令：`build`、`serve`、`clean`、`archive`。支持 `--debug`、`--verbose/-v` 全局选项。 |
+| 测试 | 已完成 | 6 个测试文件、35 个测试用例全部通过。覆盖 CLI（9）、配置（12）、构建（6）、清理（4）、归档（3）、包导入（1）。 |
 
 ## 非目标
 

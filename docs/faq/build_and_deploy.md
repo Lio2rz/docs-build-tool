@@ -2,16 +2,51 @@
 
 <!-- BEGIN: auto-generated -->
 
-## 当前能直接构建 HTML 或 PDF 吗？
+## 如何构建 HTML？
 
-<!-- auto-generated -->
+```powershell
+poetry run docs build --format html
+```
 
-还不能。项目已经配置文档构建依赖，但尚未实现 CLI 或构建逻辑。
+## 如何构建 PDF？
 
-## 生成产物应该提交到 Git 吗？
+```powershell
+poetry run docs build --format pdf
+```
 
-<!-- auto-generated -->
+PDF 构建需要 `doc-group` 依赖（`mkdocs-with-pdf` 插件）。
 
-默认不提交。HTML 和 PDF 属于可重复生成的构建产物，除非明确作为示例或发布资产。
+## 如何同时构建 HTML 和 PDF？
+
+```powershell
+poetry run docs build --format all
+```
+
+## 输出结构是怎样的？
+
+```
+site/
+  html/       # HTML 静态站点（含 index.html）
+  pdf/        # PDF 文件（docs.pdf）
+  archive/    # ZIP 归档（docs.zip）
+```
+
+## 构建产物应该提交到 Git 吗？
+
+默认不提交。`site/` 目录已在 `.gitignore` 中。HTML 和 PDF 是可重复生成的构建产物。
+
+## 如何预览文档？
+
+```powershell
+poetry run docs serve
+```
+
+启动本地服务器后浏览器访问 `http://127.0.0.1:8000`。
+
+## 如何清理构建产物？
+
+```powershell
+poetry run docs clean --output site/
+```
 
 <!-- END: auto-generated -->

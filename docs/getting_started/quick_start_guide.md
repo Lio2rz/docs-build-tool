@@ -2,12 +2,10 @@
 
 <!-- BEGIN: auto-generated -->
 
-当前项目尚未实现 CLI 和构建逻辑，因此快速入门以验证开发环境为主。
-
 ## 最小验证流程
 
-```powershell
-poetry install --with dev-group --no-root
+```shell
+poetry install --with dev-group
 poetry check --lock
 poetry run ruff check .
 poetry run pytest
@@ -17,17 +15,48 @@ poetry run pytest
 
 - `poetry check --lock` 输出 `All set!`。
 - `poetry run ruff check .` 输出 `All checks passed!`。
-- `poetry run pytest` 能启动 pytest；在没有测试用例时会报告 `no tests ran`。
+- `poetry run pytest` 报告 35 passed。
 
-## 后续最小功能验证
+## 构建当前项目文档
 
-<!-- TODO: CLI 实现后，在此补充从示例 Markdown 目录生成 HTML/PDF 的命令。 -->
+项目自身文档位于 `docs/` 目录，可用自身 CLI 构建：
 
-建议未来提供类似命令：
+```shell
+# 构建 HTML
+poetry run docs build
 
-```powershell
-poetry run docsbuildtool build-html --source docs-src --output site
-poetry run docsbuildtool build-pdf --source docs-src --output docs.pdf
+# 构建 PDF
+poetry run docs build --format pdf
+
+# 构建全部格式
+poetry run docs build --format all
+
+# 启动本地预览（默认端口 8000）
+poetry run docs serve
+```
+
+构建完成后：
+- HTML 输出位于 `site/html/`
+- PDF 输出位于 `site/pdf/docs.pdf`
+- ZIP 归档位于 `site/archive/docs.zip`（需执行 `poetry run docs archive`）
+
+## 自定义输入输出
+
+```shell
+poetry run docs build --source my-docs --output out
+poetry run docs build --format pdf --source my-docs --output out
+poetry run docs clean --output out
+poetry run docs archive --output out
+```
+
+## 调试
+
+```shell
+# 显示完整 traceback
+poetry run docs build --debug
+
+# 启用详细输出
+poetry run docs build -v
 ```
 
 <!-- END: auto-generated -->

@@ -103,4 +103,6 @@ poetry run mkdocs build --strict
 
 ## License
 
-This project is under development.
+MIT License — see [LICENSE](LICENSE) for details.
+
+Copyright (c) Lio2rz 2026. All rights reserved.

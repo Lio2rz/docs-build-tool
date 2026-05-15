@@ -2,7 +2,15 @@
 
 <!-- BEGIN: auto-generated -->
 
-本章节记录架构决策、设计评审、审计、修复、迁移和发布信息。当前信息主要来自本地 Git 历史。
+本章节记录架构决策、设计评审、审计、修复、迁移和发布信息。
+
+## 已完成记录
+
+| 类别 | 文件 | 状态 |
+| --- | --- | --- |
+| 发布记录 | `phase-01-cli-entrypoint-completed.md` | Phase 01 CLI 入口点实施完成 |
+| 审计报告 | `audits/audit-report-2026-05-14-plan-audit.md` | 开发计划审计报告 |
+| 修复报告 | `fixes/fix-2026-05-14-fix-dev-plan.md` | 开发计划修复报告 |
 
 ## 子文档
 

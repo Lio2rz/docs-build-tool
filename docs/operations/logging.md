@@ -2,14 +2,28 @@
 
 <!-- BEGIN: auto-generated -->
 
-当前代码未实现日志。项目已引入 `rich`，可用于友好的终端输出。
+## 当前实现
 
-## 建议
+项目使用 **Rich** 库的 `Console` 对象进行终端输出，非结构化日志系统。
 
-- CLI 输出面向用户，保持简洁。
-- 调试日志可通过 `--verbose` 或日志级别开关启用。
-- 构建失败时输出失败阶段、输入路径、配置路径和底层异常摘要。
+- `Console.print()` — 带 Rich 标记的彩色输出（`[green]`、`[red]`、`[dim]` 等）
+- `--verbose` / `-v` / `--debug` — 控制是否显示完整 traceback
+- 错误输出通过 `_handle_exception` 统一处理，区分 `DocsError`（可预期）和未预期异常
 
-<!-- TODO: 实现日志模块后，补充日志级别、格式和示例。 -->
+## 没有实现的功能
+
+- 不写日志文件
+- 不使用 Python logging 模块
+- 不使用结构化日志（JSON 等）
+- 无日志轮转、分级存储
+
+## 诊断命令
+
+```powershell
+poetry run docs build --verbose    # 详细构建输出
+poetry run mypy src/               # 类型检查
+poetry run ruff check .            # 代码 lint
+poetry run pytest -v               # 运行测试
+```
 
 <!-- END: auto-generated -->

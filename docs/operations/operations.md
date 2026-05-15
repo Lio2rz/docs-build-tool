@@ -2,15 +2,14 @@
 
 <!-- BEGIN: auto-generated -->
 
-当前项目是本地/CI 执行的文档构建工具，不是常驻服务。运维重点是构建环境、日志、产物管理和失败排查。
+`docsbuildtool` 是纯本地 CLI 工具，无常驻服务。不存在服务器运行时、数据库、消息队列、备份恢复或定时调度等传统运维需求。运维重点仅限：
+
+- 构建环境（Poetry, Python 3.13+）
+- 输出管理（html/, pdf/, archive/）
+- 失败排查（日志、诊断命令）
 
 ## 子文档
 
-- [运行环境](runtime_environment.md)
-- [日志管理](logging.md)
-- [备份和恢复](backup_and_restore.md)
-- [队列和后台任务](queues_and_workers.md)
-- [任务调度](scheduled_tasks.md)
-- [监控和告警](monitoring_and_alerting.md)
+- [日志管理](logging.md) — Rich Console 输出与诊断命令
 
 <!-- END: auto-generated -->

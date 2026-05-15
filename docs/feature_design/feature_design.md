@@ -2,24 +2,31 @@
 
 <!-- BEGIN: auto-generated -->
 
-本章节用于记录新特性的设计过程。当前项目尚未实现具体功能模块，因此先提供统一模板和设计流程。
+12 阶段开发已全部完成。当前没有处于设计阶段的新特性。
 
-## 建议流程
+## 已实现功能
 
-1. 明确输入、输出和用户场景。
-2. 定义 CLI 或 API 交互方式。
-3. 设计核心数据结构和错误模型。
-4. 编写测试计划。
-5. 记录兼容性和迁移影响。
-
-## 当前候选特性
-
-| 特性 | 状态 | 说明 |
+| 特性 | CLI 命令 | 模块 |
 | --- | --- | --- |
-| Markdown 目录扫描 | 待设计 | 发现 `.md` 文件、资源文件和导航顺序。 |
-| MkDocs 配置生成 | 待设计 | 根据输入目录生成确定性 `mkdocs.yml`。 |
-| HTML 构建 | 待设计 | 调用 MkDocs 生成静态站点。 |
-| PDF 构建 | 待设计 | 使用 `mkdocs-with-pdf` 或适配器生成 PDF。 |
-| CLI | 待设计 | 使用 `typer` 暴露命令。 |
+| Markdown 源解析 | (自动) | `config.py` — `resolve_source()`, `_generate_summary()` |
+| MkDocs 配置生成 | (自动) | `config.py` — `generate_mkdocs_config()` |
+| HTML 构建 | `docs build --format html` | `builder.py` — `build_html()` |
+| PDF 构建 | `docs build --format pdf` | `builder.py` — `build_pdf()` |
+| 全量构建 | `docs build --format all` | `builder.py` — `build_all()` |
+| 预览服务 | `docs serve` | `serve.py` — `serve_preview()` |
+| 清理产物 | `docs clean` | `clean.py` — `clean_output()` |
+| ZIP 归档 | `docs archive` | `archive.py` — `archive_zip()` |
+
+## 设计流程
+
+新特性设计请遵循：
+
+1. 明确输入、输出和用户场景
+2. 定义 CLI 交互方式（Typer command）
+3. 设计核心数据结构和错误模型（DocsError 层级）
+4. 编写测试计划（pytest, 优先临时目录）
+5. 记录兼容性影响
+
+模板参见 [feature_template.md](feature_template.md)。
 
 <!-- END: auto-generated -->

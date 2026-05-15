@@ -5,15 +5,21 @@ site_dir: site
 exclude_docs: |
   /summary.md
 
+copyright: Copyright &copy; 2026 <a href="https://github.com/Lio2rz" target="_blank">Lio2rz</a>. All rights reserved.
+
 theme:
   name: material
   language: zh
+  custom_dir: docs/overrides
 
 plugins:
   - search
   - literate-nav:
       nav_file: summary.md
   - section-index
+
+extra_css:
+  - stylesheets/extra.css
 
 markdown_extensions:
   - admonition

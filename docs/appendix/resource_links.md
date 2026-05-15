@@ -2,15 +2,28 @@
 
 <!-- BEGIN: auto-generated -->
 
-当前仓库没有 README 链接或远程资源链接。
+## 项目资源
 
-## 待补充资源
+| 资源 | 位置 |
+| --- | --- |
+| 项目仓库 | 本地 Git 仓库（67 commits） |
+| CI 工作流 | `.github/workflows/lint.yml` + `.github/workflows/tests.yml` |
+| 开发文档 | `docs/` 目录（MkDocs 构建） |
+| Agent 规则 | `AGENTS.md` + `.agents/` |
+
+## 外部参考
 
 | 资源 | 链接 |
 | --- | --- |
-| 项目仓库 | <!-- TODO: 补充远程仓库 URL --> |
-| 文档站点 | <!-- TODO: 补充发布后的文档站点 URL --> |
-| CI 面板 | <!-- TODO: 补充 CI URL --> |
-| Issue 跟踪 | <!-- TODO: 补充 issue tracker URL --> |
+| MkDocs 官方文档 | https://www.mkdocs.org |
+| Material for MkDocs | https://squidfunk.github.io/mkdocs-material/ |
+| mkdocs-literate-nav | https://oprypin.github.io/mkdocs-literate-nav/ |
+| mkdocs-section-index | https://oprypin.github.io/mkdocs-section-index/ |
+| mkdocs-with-pdf | https://github.com/orzih/mkdocs-with-pdf |
+| Poetry 文档 | https://python-poetry.org/docs/ |
+| Typer 文档 | https://typer.tiangolo.com/ |
+| Rich 文档 | https://rich.readthedocs.io/ |
+| pytest 文档 | https://docs.pytest.org/ |
+| Ruff 文档 | https://docs.astral.sh/ruff/ |
 
 <!-- END: auto-generated -->

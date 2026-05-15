@@ -8,10 +8,12 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.13"
 keywords = ["documentation", "markdown", "mkdocs", "pdf", "static-site"]
+license = {text = "MIT"}
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Framework :: MkDocs",
     "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.13",

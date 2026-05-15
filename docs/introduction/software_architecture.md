@@ -2,44 +2,69 @@
 
 <!-- BEGIN: auto-generated -->
 
-当前项目仍处于骨架阶段，仓库中只有包入口文件和配置文件。根据 `AGENTS.md` 与 `.agents/project.md` 的约束，推荐架构应分为 CLI 编排、文档发现、MkDocs 配置生成、HTML 构建和 PDF 构建几个职责区。
+项目已从骨架阶段演进为完整的 7 模块架构，源码位于 `src/docsbuildtool/`。
 
 ## 当前仓库结构
 
 ```text
 docsbuildtool/
 ├── src/docsbuildtool/
-│   └── __init__.py
+│   ├── __init__.py
+│   ├── cli.py           # Typer CLI（4 命令 + 全局选项）
+│   ├── config.py        # 配置解析与 MkDocs 配置生成
+│   ├── builder.py       # HTML/PDF 构建编排
+│   ├── serve.py         # 本地预览服务器
+│   ├── clean.py         # 构建产物清理
+│   ├── archive.py       # ZIP 归档
+│   └── errors.py        # 统一异常与退出码
 ├── tests/
-│   └── __init__.py
+│   ├── test_cli.py      (9 tests)
+│   ├── test_config.py   (12 tests)
+│   ├── test_builder.py  (6 tests)
+│   ├── test_clean.py    (4 tests)
+│   ├── test_archive.py  (3 tests)
+│   └── test_package.py  (1 test)
 ├── pyproject.toml
 ├── poetry.lock
 ├── AGENTS.md
-└── .agents/
+├── .agents/
+└── .github/workflows/   # CI: lint + tests
 ```
 
-## 预期数据流
+## 实际数据流
 
 ```text
-Markdown 输入目录
-    |
-    v
-目录扫描与导航生成
-    |
-    v
-MkDocs 配置生成或读取
-    |
-    +--> MkDocs HTML 构建 --> 静态 HTML 输出目录
-    |
-    +--> PDF 插件或渲染器 --> PDF 输出文件
+CLI (cli.py) ── 参数解析、Rich 输出 ──┐
+                                       │
+      ┌────────────────────────────────┘
+      v
+配置层 (config.py) ── resolve_source() / resolve_output()
+      │                  generate_mkdocs_config()
+      │                  validate_paths()
+      v
+构建层 (builder.py) ── build_html() / build_pdf() / build_all()
+      │                 子进程调用 mkdocs build
+      v
+MkDocs 生态 ── mkdocs-material + literate-nav
+                + section-index + with-pdf
+      │
+      +──> HTML 输出目录 (site/html/)
+      +──> PDF 输出文件 (site/pdf/docs.pdf)
+
+辅助命令:
+  serve.py   ── mkdocs serve（阻塞式本地预览）
+  clean.py   ── 删除 html/ pdf/ archive/ 及临时工作目录
+  archive.py ── 将 html/ + pdf/ 打包为 archive/docs.zip
 ```
 
-## 分层建议
+## 分层设计
 
-- CLI 层：解析命令参数，处理终端输出和退出码。
-- 应用层：编排 HTML/PDF 构建流程。
-- 配置层：生成或加载 `mkdocs.yml`。
-- 文件系统层：使用 `pathlib.Path` 处理输入、输出和资源路径。
-- 渲染适配层：封装 MkDocs 和 PDF 渲染实现，避免业务逻辑直接绑定具体插件。
+- **CLI 层 (cli.py)**：基于 Typer 定义 4 个命令（build/serve/clean/archive），使用 Rich 美化终端输出，通过 `--debug` 展示完整 traceback。
+- **配置层 (config.py)**：实现 `resolve_source()`、`resolve_output()`、`generate_mkdocs_config()`、`generate_pdf_config()` 和 `validate_paths()`，产出 `ResolvedConfig` 数据类。
+- **构建层 (builder.py)**：定义 `BuildFormat` 枚举（html/pdf/all），通过 `subprocess.run` 调用 mkdocs 命令行，实现 `build_html()`、`build_pdf()` 和 `build_all()`。
+- **服务层 (serve.py)**：`serve_preview()` 通过子进程启动 mkdocs serve。
+- **清理层 (clean.py)**：`clean_output()` 删除 html/、pdf/、archive/ 子目录和临时工作目录。
+- **归档层 (archive.py)**：`archive_zip()` 使用 zipfile 将构建产物打包为 ZIP。
+- **错误层 (errors.py)**：定义 `ExitCode` 枚举（SUCCESS/FAILURE/USER_ERROR/ENV_MISSING）和结构化异常类 `DocsError`、`ConfigError`、`BuildError`、`EnvMissingError`。
 
 <!-- END: auto-generated -->
