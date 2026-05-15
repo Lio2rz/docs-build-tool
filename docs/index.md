@@ -1,75 +1,45 @@
 # docsbuildtool
 
-![Python](https://img.shields.io/badge/python-%3E%3D3.13-3776AB)
-![Rich](https://img.shields.io/badge/rich-15.0.0-4B8BBE)
-![Typer](https://img.shields.io/badge/typer-0.25.1-4B8BBE)
-![Markdown](https://img.shields.io/badge/markdown-3.10.2-4B8BBE)
-![MkDocs](https://img.shields.io/badge/mkdocs-1.6.1-4B8BBE)
-![mkdocs-literate-nav](https://img.shields.io/badge/mkdocs--literate--nav-0.6.3-4B8BBE)
-![mkdocs-material](https://img.shields.io/badge/mkdocs--material-9.7.6-4B8BBE)
-![mkdocs-section-index](https://img.shields.io/badge/mkdocs--section--index-0.3.12-4B8BBE)
-![mkdocs-with-pdf](https://img.shields.io/badge/mkdocs--with--pdf-0.9.3-4B8BBE)
-![pymdown-extensions](https://img.shields.io/badge/pymdown--extensions-10.21.3-4B8BBE)
-![PyYAML](https://img.shields.io/badge/pyyaml-6.0.3-4B8BBE)
-![pytest](https://img.shields.io/badge/pytest-9.0.3-4B8BBE)
-![pytest-cov](https://img.shields.io/badge/pytest--cov-7.1.0-4B8BBE)
-![Black](https://img.shields.io/badge/black-25.12.0-4B8BBE)
-![isort](https://img.shields.io/badge/isort-6.1.0-4B8BBE)
-![mypy](https://img.shields.io/badge/mypy-1.20.2-4B8BBE)
-![Ruff](https://img.shields.io/badge/ruff-0.15.12-4B8BBE)
+`docsbuildtool` 是一个跨平台 CLI 工具，使用 MkDocs 生态将结构化 Markdown 文档构建为静态 HTML 和 PDF。
 
-`docsbuildtool` 是一个 Python 文档构建工具项目，目标是将指定目录中的结构化 Markdown 文档转换为静态 HTML 文档，并支持生成 PDF 文档。
-
-## 项目目标
-
-- 使用 MkDocs 生态生成静态 HTML 文档站点。
-- 使用 `docs/summary.md` 作为 MkDocs 导航源，避免在 `mkdocs.yml` 中硬编码完整导航。
-- 支持通过 `mkdocs-with-pdf` 从同一套 Markdown 文档生成 PDF。
-- 保持输入目录、输出目录和 MkDocs 配置路径可配置。
-- 构建过程中不修改源 Markdown 文档。
-
-## 当前状态
-
-项目目前处于早期骨架阶段：
-
-- 项目名：`docsbuildtool`
-- Poetry 模式：非打包项目，仅用于依赖管理和任务运行
-- 源码目录：`src/docsbuildtool/`
-- 测试目录：`tests/`
-- 开发文档目录：`docs/`
-- MkDocs 配置：`mkdocs.yml`
-- 导航定义：`docs/summary.md`
-
-## 依赖分组
-
-项目使用 Poetry 管理依赖：
-
-- `project.dependencies`：项目脚本运行期基础依赖，包括 `rich` 和 `typer`。
-- `doc-group`：文档构建依赖，包括 MkDocs、Material 主题、导航插件和 PDF 插件。
-- `test-group`：测试依赖，包括 `pytest` 和 `pytest-cov`。
-- `dev-group`：开发聚合组，包含 `doc-group`、`test-group`、Black、isort、mypy 和 Ruff。
-
-## 快速验证
+## 快速开始
 
 ```powershell
 poetry install --with dev-group --no-root
-poetry check --lock
-poetry run black --check .
-poetry run isort --check-only .
-poetry run ruff check .
-poetry run mypy
-poetry run pytest
-poetry run mkdocs build
+pip install -e .
+docs build
 ```
 
-当前 `tests/` 目录还没有测试用例，因此 `poetry run pytest` 可能显示 `no tests ran`。
+## CLI 命令
 
-## 文档构建
+| 命令 | 说明 |
+|------|------|
+| `docs build` | 构建 HTML（默认），`--format pdf` 或 `--format all` |
+| `docs serve` | 启动本地 MkDocs 预览服务器 |
+| `docs clean` | 安全删除生成的构建文件 |
+| `docs archive --format zip` | 将构建输出打包为 ZIP |
 
-HTML 文档构建：
+## 当前状态
 
-```powershell
-poetry run mkdocs build
-```
+项目已实现 12 个开发阶段：
 
-构建输出目录为 `site/`。该目录是构建产物，默认不提交到版本控制。
+- **Phase 01**: Typer 命令行入口
+- **Phase 02**: 源目录解析与 MkDocs 配置生成
+- **Phase 03**: HTML 构建
+- **Phase 04**: PDF 构建（mkdocs-with-pdf）
+- **Phase 05**: 全量构建与输出布局
+- **Phase 06**: 本地预览服务器
+- **Phase 07**: 安全清理
+- **Phase 08**: ZIP 归档
+- **Phase 09**: 跨平台行为统一
+- **Phase 10**: 测试套件与 CI（35 个测试）
+- **Phase 11**: 用户文档
+- **Phase 12**: 审查与治理
+
+## 项目信息
+
+- 项目名：`docsbuildtool`
+- 源码目录：`src/docsbuildtool/`
+- 测试目录：`tests/`
+- Poetry 模式：非打包（仅依赖管理）
+- 开发状态：Pre-Alpha

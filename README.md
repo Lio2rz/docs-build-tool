@@ -3,73 +3,104 @@
 ![Python](https://img.shields.io/badge/python-%3E%3D3.13-3776AB)
 ![Rich](https://img.shields.io/badge/rich-15.0.0-4B8BBE)
 ![Typer](https://img.shields.io/badge/typer-0.25.1-4B8BBE)
-![Markdown](https://img.shields.io/badge/markdown-3.10.2-4B8BBE)
 ![MkDocs](https://img.shields.io/badge/mkdocs-1.6.1-4B8BBE)
-![mkdocs-literate-nav](https://img.shields.io/badge/mkdocs--literate--nav-0.6.3-4B8BBE)
 ![mkdocs-material](https://img.shields.io/badge/mkdocs--material-9.7.6-4B8BBE)
-![mkdocs-section-index](https://img.shields.io/badge/mkdocs--section--index-0.3.12-4B8BBE)
 ![mkdocs-with-pdf](https://img.shields.io/badge/mkdocs--with--pdf-0.9.3-4B8BBE)
-![pymdown-extensions](https://img.shields.io/badge/pymdown--extensions-10.21.3-4B8BBE)
-![PyYAML](https://img.shields.io/badge/pyyaml-6.0.3-4B8BBE)
 ![pytest](https://img.shields.io/badge/pytest-9.0.3-4B8BBE)
-![pytest-cov](https://img.shields.io/badge/pytest--cov-7.1.0-4B8BBE)
-![Black](https://img.shields.io/badge/black-25.12.0-4B8BBE)
-![isort](https://img.shields.io/badge/isort-6.1.0-4B8BBE)
-![mypy](https://img.shields.io/badge/mypy-1.20.2-4B8BBE)
-![Ruff](https://img.shields.io/badge/ruff-0.15.12-4B8BBE)
 
-`docsbuildtool` 是一个 Python 文档构建工具项目，目标是将指定目录中的结构化 Markdown 文档转换为静态 HTML 文档，并支持生成 PDF 文档。
+`docsbuildtool` is a cross-platform CLI tool that converts a directory of structured Markdown documentation into static HTML and PDF, using the MkDocs ecosystem.
 
-## 项目目标
+## Quick Start
 
-- 使用 MkDocs 生态生成静态 HTML 文档站点。
-- 使用 `docs/summary.md` 作为 MkDocs 导航源，避免在 `mkdocs.yml` 中硬编码完整导航。
-- 支持通过 `mkdocs-with-pdf` 从同一套 Markdown 文档生成 PDF。
-- 保持输入目录、输出目录和 MkDocs 配置路径可配置。
-- 构建过程中不修改源 Markdown 文档。
+```powershell
+# Install dependencies
+poetry install --with dev-group --no-root
+pip install -e .
 
-## 当前状态
+# Build HTML documentation
+docs build
 
-项目目前处于早期骨架阶段：
+# Build PDF
+docs build --format pdf
 
-- 项目名：`docsbuildtool`
-- Poetry 模式：非打包项目，仅用于依赖管理和任务运行
-- 源码目录：`src/docsbuildtool/`
-- 测试目录：`tests/`
-- 开发文档目录：`docs/`
-- MkDocs 配置：`mkdocs.yml`
-- 导航定义：`docs/summary.md`
+# Build both
+docs build --format all
 
-## 依赖分组
+# Preview locally
+docs serve
 
-项目使用 Poetry 管理依赖：
+# Archive output
+docs archive --format zip
 
-- `project.dependencies`：项目脚本运行期基础依赖，包括 `rich` 和 `typer`。
-- `doc-group`：文档构建依赖，包括 MkDocs、Material 主题、导航插件和 PDF 插件。
-- `test-group`：测试依赖，包括 `pytest` 和 `pytest-cov`。
-- `dev-group`：开发聚合组，包含 `doc-group`、`test-group`、Black、isort、mypy 和 Ruff。
+# Clean generated files
+docs clean
+```
 
-## 快速验证
+Alternatively, use the fallback entry point:
+
+```powershell
+python -m docsbuildtool build
+```
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `docs build` | Build HTML docs (default), or `--format pdf`, `--format all` |
+| `docs serve` | Start a local MkDocs preview server |
+| `docs clean` | Remove generated build files safely |
+| `docs archive --format zip` | Archive built output into a ZIP file |
+
+### Options
+
+| Option | Applies to | Description |
+|--------|-----------|-------------|
+| `--source <dir>` | build, serve | Source directory (default: `docs`) |
+| `--output <dir>` | build, clean, archive | Output root directory (default: `site`) |
+| `--format html/pdf/all` | build | Build format (default: `html`) |
+| `--format zip` | archive | Archive format |
+| `--debug` | all | Show full traceback on error |
+| `--verbose` / `-v` | all | Enable verbose output |
+| `--version` | all | Show version and exit |
+
+## Output Layout
+
+```
+<output>/
+├── html/          # HTML build output
+├── pdf/
+│   └── docs.pdf   # PDF output
+└── archive/
+    └── docs.zip   # Archive output
+```
+
+## Dependencies
+
+| Group | Contents |
+|-------|----------|
+| `project.dependencies` | `rich`, `typer` |
+| `doc-group` | MkDocs, Material theme, literate-nav, section-index, mkdocs-with-pdf |
+| `test-group` | `pytest`, `pytest-cov` |
+| `dev-group` | All above + black, isort, mypy, ruff |
+
+## Development
 
 ```powershell
 poetry install --with dev-group --no-root
-poetry check --lock
+pip install -e .
+```
+
+Quality checks:
+
+```powershell
 poetry run black --check .
 poetry run isort --check-only .
 poetry run ruff check .
-poetry run mypy
-poetry run pytest
-poetry run mkdocs build
+poetry run mypy src/
+poetry run pytest              # 35 tests
+poetry run mkdocs build --strict
 ```
 
-当前 `tests/` 目录还没有测试用例，因此 `poetry run pytest` 可能显示 `no tests ran`。
+## License
 
-## 文档构建
-
-HTML 文档构建：
-
-```powershell
-poetry run mkdocs build
-```
-
-构建输出目录为 `site/`。该目录是构建产物，默认不提交到版本控制。
+This project is under development.

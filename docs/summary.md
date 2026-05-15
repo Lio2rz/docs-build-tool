@@ -32,6 +32,7 @@
     - [系统要求](getting_started/system_requirements.md)
     - [开发环境搭建](getting_started/development_environment_setup.md)
     - [快速入门](getting_started/quick_start_guide.md)
+    - [CLI 快速入门](getting_started/cli_quick_start.md)
 - [配置和设置](configuration_and_settings/configuration_and_settings.md)
     - [环境配置概述](configuration_and_settings/environment_configuration_overview.md)
     - [开发环境配置](configuration_and_settings/development_environment_configuration.md)
