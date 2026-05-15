@@ -4,6 +4,7 @@ import typer
 from rich.console import Console
 
 from docsbuildtool.builder import BuildFormat, build_all, build_html, build_pdf
+from docsbuildtool.clean import clean_output
 from docsbuildtool.errors import DocsError, ExitCode
 from docsbuildtool.serve import serve_preview
 
@@ -98,7 +99,12 @@ def clean(
     ] = None,
 ) -> None:
     """Remove generated build files."""
-    console.print("[yellow]clean command is not yet implemented.[/yellow]")
+    removed = clean_output(output)
+    if removed:
+        for path in removed:
+            console.print(f"[green]Removed:[/green] {path}")
+    else:
+        console.print("[dim]Nothing to clean.[/dim]")
 
 
 @app.command()
