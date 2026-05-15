@@ -51,6 +51,9 @@ test-group = [
 [tool.poetry]
 package-mode = false
 
+[tool.poetry.scripts]
+docs = "docsbuildtool.cli:app"
+
 [tool.pytest.ini_options]
 minversion = "8.3"
 addopts = "-ra --strict-config --strict-markers"
