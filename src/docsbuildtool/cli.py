@@ -3,6 +3,7 @@ from typing import Annotated
 import typer
 from rich.console import Console
 
+from docsbuildtool.archive import archive_zip
 from docsbuildtool.builder import BuildFormat, build_all, build_html, build_pdf
 from docsbuildtool.clean import clean_output
 from docsbuildtool.errors import DocsError, ExitCode
@@ -119,7 +120,12 @@ def archive(
     ] = None,
 ) -> None:
     """Archive built documentation into a ZIP file."""
-    console.print("[yellow]archive command is not yet implemented.[/yellow]")
+    if format != "zip":
+        console.print(f"[red]Unsupported archive format: {format}[/red]")
+        raise typer.Exit(code=ExitCode.USER_ERROR)
+    zip_path = archive_zip(output)
+    size_mb = zip_path.stat().st_size / (1024 * 1024)
+    console.print(f"[green]Archive created:[/green] {zip_path} ({size_mb:.1f} MB)")
 
 
 def _handle_exception(exc: BaseException) -> None:
