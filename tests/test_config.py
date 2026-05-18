@@ -98,6 +98,7 @@ def test_generate_config_output_structure(tmp_path: Path) -> None:
         config = yaml.safe_load(f)
     assert config["docs_dir"] == source.resolve().as_posix()
     assert config["site_dir"] == output.resolve().as_posix()
+    assert config["use_directory_urls"] is False
     assert any("literate-nav" in (p if isinstance(p, str) else str(p)) for p in (config.get("plugins") or []))
 
 
